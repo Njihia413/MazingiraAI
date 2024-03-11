@@ -9,6 +9,9 @@ module.exports = withMT( {
         'baloo': ['"Baloo Da 2"', 'sans-serif'],
         // Add other font families as needed
       },
+      backgroundImage: {
+        'brownBackground': "url('../public/brownBg1.png')"
+      }
     },
   },
   plugins: [
