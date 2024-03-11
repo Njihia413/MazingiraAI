@@ -4,6 +4,7 @@ import HomeImg2 from "../assets/images/HomeImg2.png";
 import HomeImg3 from "../assets/images/HomeImg3.png";
 import Line from "../assets/images/Line1.png";
 import Person from "../assets/images/Person.png";
+import Path from "../assets/images/Path.png";
 
 const Home = () => {
     return (
@@ -80,19 +81,124 @@ const Home = () => {
                 </div>
 
                 <div className="mt-[10rem]">
-                    <div className="flex">
-                        <p className="font-baloo font-semibold text-[25px] text-black mt-3">01</p>
+                    <div>
+                        <div className="flex">
+                            <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">01</p>
 
-                        <p className="font-baloo font-normal text-[40px] text-black px-10">
-                            Lorem Ipsum
+                            <p className="font-baloo font-normal text-[40px] text-black px-10">
+                                Lorem Ipsum
+                            </p>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 className="lucide lucide-arrow-right mt-4">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </div>
+
+                        <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                            Lorem ipsum dolor sit amet
                         </p>
 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                             className="lucide lucide-arrow-right mt-4">
-                            <path d="M5 12h14"/>
-                            <path d="m12 5 7 7-7 7"/>
-                        </svg>
+                        <img className="mt-[3rem]" src={Path} alt="Path"/>
+                    </div>
+
+                    <div className="mt-[3rem]">
+                        <div className="flex">
+                            <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">02</p>
+
+                            <p className="font-baloo font-normal text-[40px] text-black px-10">
+                                Lorem Ipsum
+                            </p>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 className="lucide lucide-arrow-right mt-4">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </div>
+
+                        <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                            Lorem ipsum dolor sit amet
+                        </p>
+
+                        <img className="mt-[3rem]" src={Path} alt="Path"/>
+                    </div>
+
+                    <div className="mt-[3rem]">
+                        <div className="flex">
+                            <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">03</p>
+
+                            <p className="font-baloo font-normal text-[40px] text-black px-10">
+                                Lorem Ipsum
+                            </p>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 className="lucide lucide-arrow-right mt-4">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </div>
+
+                        <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                            Lorem ipsum dolor sit amet
+                        </p>
+
+                        <img className="mt-[3rem]" src={Path} alt="Path"/>
+                    </div>
+
+                    <div className="mt-[3rem]">
+                        <div className="flex">
+                            <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">04</p>
+
+                            <p className="font-baloo font-normal text-[40px] text-black px-10">
+                                Lorem Ipsum
+                            </p>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 className="lucide lucide-arrow-right mt-4">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </div>
+
+                        <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                            Lorem ipsum dolor sit amet
+                        </p>
+
+                        <img className="mt-[3rem]" src={Path} alt="Path"/>
+                    </div>
+
+                    <div className="mt-[3rem]">
+                        <div className="flex">
+                            <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">05</p>
+
+                            <p className="font-baloo font-normal text-[40px] text-black px-10">
+                                Lorem Ipsum
+                            </p>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 className="lucide lucide-arrow-right mt-4">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </div>
+
+                        <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                            Lorem ipsum dolor sit amet
+                        </p>
+
+                        <img className="mt-[3rem]" src={Path} alt="Path"/>
                     </div>
                 </div>
             </div>
