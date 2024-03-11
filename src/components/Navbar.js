@@ -41,21 +41,21 @@ const Navbar = () => {
                         <li className="block py-2 px-3 md:p-0 font-baloo font-normal text-[18px]">
                             <NavLink
                                 to="/"
-                                className={({isActive}) => isActive ? "text-[#21383E]" : ""}>
+                                className={({isActive}) => isActive ? "text-[#00BB1E]" : ""}>
                                 Home
                             </NavLink>
                         </li>
                         <li className="block py-2 px-3 md:p-0 font-baloo font-normal text-[18px]">
                             <NavLink
                                 to="/about"
-                                className={({isActive}) => isActive ? "text-[#21383E]" : ""}>
+                                className={({isActive}) => isActive ? "text-[#00BB1E]" : ""}>
                                 About
                             </NavLink>
                         </li>
                         <li className="block py-2 px-3 md:p-0 font-baloo font-normal text-[18px]">
                             <NavLink
                                 to="/contact"
-                                className={({isActive}) => isActive ? "text-[#21383E]" : ""}>
+                                className={({isActive}) => isActive ? "text-[#00BB1E]" : ""}>
                                 Contact
                             </NavLink>
                         </li>
