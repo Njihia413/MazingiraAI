@@ -42,28 +42,9 @@ const SignupForm = () => {
                        required/>
             </div>
 
-            <div className="flex items-center justify-between mb-5">
-                <div className="flex items-start">
-                    <div className="flex items-center h-5">
-                        <input id="remember" type="checkbox" value=""
-                               className="w-4 h-4 border border-[#CFD9E0] rounded bg-white"
-                               required/>
-                    </div>
-
-                    <div className="">
-                        <label htmlFor="remember" className="ms-2 text-[16px] font-baloo font-normal text-[#718096]">
-                            Remember me
-                        </label>
-                    </div>
-                </div>
-                <a href="/forgot-password"
-                   className="text-[16px] font-baloo font-medium text-[#A19B9B] underline hover:no-underline dark:text-primary-500">
-                    Forgot password?
-                </a>
-            </div>
 
             <button type="submit"
-                    className="mt-[1rem] text-[#F7FAFC] bg-[#00BB1E] h-14 font-baloo font-semibold rounded-[20px] text-[20px] w-full px-5 py-2.5 text-center">
+                    className="mt-[2rem] text-[#F7FAFC] bg-[#00BB1E] h-14 font-baloo font-semibold rounded-[20px] text-[20px] w-full px-5 py-2.5 text-center">
                 Create Account
             </button>
 
