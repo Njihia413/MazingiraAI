@@ -10,11 +10,14 @@ module.exports = withMT( {
         // Add other font families as needed
       },
       backgroundImage: {
-        'brownBackground': "url('../public/brownBg1.png')"
+        'brownBackground': "url('../public/brownBg1.png')",
+        'signupBackground': "url('../public/Signup.png')",
+        'signinBackground': "url('../public/Signin.png')",
       }
     },
   },
   plugins: [
-    require('flowbite/plugin')
+    require('flowbite/plugin'),
+    [require("daisyui")]
   ],
 });
