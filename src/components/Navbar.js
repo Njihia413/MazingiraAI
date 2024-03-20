@@ -59,6 +59,13 @@ const Navbar = () => {
                                 Contact
                             </NavLink>
                         </li>
+                        <li className="block py-2 px-3 md:p-0 font-baloo font-normal text-[18px]">
+                            <NavLink
+                                to="/chat"
+                                className={({isActive}) => isActive ? "text-[#00BB1E]" : ""}>
+                                Chat
+                            </NavLink>
+                        </li>
                         <li className="md:hidden block">
                             <div
                                 className="font-baloo font-normal text-black text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden">
