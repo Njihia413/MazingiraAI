@@ -6,11 +6,11 @@ const Navbar = () => {
     return (
         <nav className="container  mx-auto bg-white border-gray-200 ">
             <div className=" flex flex-wrap items-center justify-between py-4">
-                <div className="flex">
-                    <img className="flex items-center space-x-3 rtl:space-x-reverse h-16 cursor-pointer" alt="Logo"
-                         src={Logo}/>
-                    <p className="font-bold font-baloo py-4 px-3 text-[20px]">MazingiraAI</p>
-                </div>
+                <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer">
+                    <img className="h-16" alt="Logo" src={Logo}/>
+                    <p className="font-bold font-baloo py-4 text-[20px]">MazingiraAI</p>
+                </a>
+
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button"
                             className="text-[#00BB1E] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px]  md:block hidden">
