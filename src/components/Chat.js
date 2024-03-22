@@ -142,14 +142,14 @@ export default function Chat() {
                 </div>
               </div>
               <div className="account">
-                <div class=" border border-gray-100 rounded-lg bg-white">
-                  <a href="#" class="items-center block p-3 sm:flex">
+                <div className=" border border-gray-100 rounded-lg bg-white">
+                  <a href="#" className="items-center block p-3 sm:flex">
                     <img
-                      class="w-12 h-12 mb-3 me-3 rounded-full sm:mb-0"
+                      className="w-12 h-12 mb-3 me-3 rounded-full sm:mb-0"
                       src="https://ui-avatars.com/api/?name=James+Kanyiri"
                       alt="Jese Leos image"
                     />
-                    <div class="flex flex-col">
+                    <div className="flex flex-col">
                       <p className="text-xs font-normal">Welcome back</p>
                       <p className="text-sm font-bold">James Kanyiri</p>
                     </div>
