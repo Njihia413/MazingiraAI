@@ -13,6 +13,7 @@ module.exports = withMT( {
         'brownBackground': "url('../public/brownBg1.png')",
         'signupBackground': "url('../public/Signup.png')",
         'signinBackground': "url('../public/Signin.png')",
+        'aboutBackground': "url('../public/About.png')",
       }
     },
   },
