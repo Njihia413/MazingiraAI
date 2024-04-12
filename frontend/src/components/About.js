@@ -34,7 +34,7 @@ const About = () => {
                     <img src={Group} alt="Group" className="mx-auto mt-3"/>
                 </div>
 
-                <div className="grid md:grid-cols-2 mt-[2rem]">
+                <div className="grid md:grid-cols-2 mt-[2rem] gap-24">
                     <div className="mx-auto p-6">
                         <h5 className="font-baloo font-semibold text-black text-[36px] mt-[3rem]">
                             Knowledgeable <br/>
@@ -59,7 +59,7 @@ const About = () => {
                 </div>
 
 
-                <div className="grid md:grid-cols-2 mt-[2rem]">
+                <div className="grid md:grid-cols-2 mt-[2rem] ">
                     <div className="hidden md:block">
                         <div className="mr-auto">
                             <img src={About2} alt="About2"/>
@@ -84,7 +84,7 @@ const About = () => {
                 </div>
 
 
-                <div className="grid md:grid-cols-2 mt-[2rem]">
+                <div className="grid md:grid-cols-2 mt-[2rem] gap-24">
                     <div className="mx-auto p-6">
                         <h5 className="font-baloo font-semibold text-black text-[36px] mt-[3rem]">
                             Climate change news <br/>
