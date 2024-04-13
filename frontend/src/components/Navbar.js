@@ -7,7 +7,7 @@ const Navbar = () => {
         <nav className="container  mx-auto bg-white border-gray-200 ">
             <div className=" flex flex-wrap items-center justify-between py-4">
                 <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer">
-                    <img className="h-16" alt="Logo" src={Logo}/>
+                    <img className="h-16 sm:px-6" alt="Logo" src={Logo}/>
                     <p className="font-bold font-baloo py-4 text-[20px]">MazingiraAI</p>
                 </a>
 
