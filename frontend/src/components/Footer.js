@@ -4,7 +4,7 @@ import Google from "../assets/images/google-icon.svg";
 
 const Footer = () => {
     return (
-        <footer className="mt-[10rem] bg-white">
+        <footer className="mt-[5rem] md:mt-[10rem] bg-white">
             <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
                 <ul className="mt-12 flex justify-center gap-6 md:gap-8">
                     <div className="bg-[#E5F1F5] w-[60px] h-[60px] rounded-full">
