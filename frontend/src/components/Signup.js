@@ -26,7 +26,7 @@ const Signup = () => {
                 </div>
 
                 <div className="hidden sm:hidden md:block">
-                    <img className="h-auto w-full" alt="SignupImg" src={SignupImg}/>
+                    <img className="h-full w-full" alt="SignupImg" src={SignupImg}/>
                 </div>
             </div>
         </section>

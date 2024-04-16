@@ -25,7 +25,7 @@ const Login = () => {
                 </div>
 
                 <div className="hidden sm:hidden md:block">
-                    <img className="min-h-screen w-full" alt="Login" src={LoginImg}/>
+                    <img className="h-full w-full" alt="Login" src={LoginImg}/>
                 </div>
             </div>
         </section>
