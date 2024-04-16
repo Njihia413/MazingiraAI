@@ -27,7 +27,7 @@ const About = () => {
 
             <div className="container mx-auto bg-white">
                 <div className="text-center mt-[5rem]">
-                    <h4 className="font-baloo font-semibold text-black text-[45px]">
+                    <h4 className="font-baloo font-semibold text-black text-[35px] md:text-[45px]">
                         Because a sustainable future starts with a conversation
                     </h4>
 
@@ -36,14 +36,14 @@ const About = () => {
 
                 <div className="grid md:grid-cols-2 mt-[2rem] gap-24">
                     <div className="mx-auto p-6">
-                        <h5 className="font-baloo font-semibold text-black text-[36px] mt-[3rem]">
+                        <h5 className="font-baloo font-semibold text-black text-[30px] md:text-[36px] md:mt-[3rem]">
                             Knowledgeable <br/>
                             climate companion
                         </h5>
 
                         <img src={AboutRectangle} alt="AboutRectangle" className="mt-3"/>
 
-                        <p className="font-baloo font-normal text-[#848383] text-[18px] text-left mt-[1rem]">
+                        <p className="font-baloo font-normal text-[#848383] md:text-[18px] text-left mt-[1rem]">
                             Ut enim ad minima veniam, quis nostrum exercitationem <br/>
                             ullam corporis suscipit laboriosam, nisi ut al Ut enim ad <br/>
                             minima veniam, quis nostrum exercitationem ullam corporis <br/>
@@ -67,14 +67,14 @@ const About = () => {
                     </div>
 
                     <div className="mx-auto p-6">
-                        <h5 className="font-baloo font-semibold text-black text-[36px] text-right mt-[3rem]">
+                        <h5 className="font-baloo font-semibold text-black text-[30px] md:text-[36px] text-right md:mt-[3rem]">
                             Personalized sustainability <br/>
                             guidance
                         </h5>
 
                         <img src={AboutRectangle} alt="AboutRectangle" className="mt-3 ml-auto"/>
 
-                        <p className="font-baloo font-normal text-[#848383] text-[18px] mt-[1rem] text-right">
+                        <p className="font-baloo font-normal text-[#848383] md:text-[18px] mt-[1rem] text-right">
                             Ut enim ad minima veniam, quis nostrum exercitationem <br/>
                             ullam corporis suscipit laboriosam, nisi ut al Ut enim ad <br/>
                             minima veniam, quis nostrum exercitationem ullam corporis <br/>
@@ -86,14 +86,14 @@ const About = () => {
 
                 <div className="grid md:grid-cols-2 mt-[2rem] gap-24">
                     <div className="mx-auto p-6">
-                        <h5 className="font-baloo font-semibold text-black text-[36px] mt-[3rem]">
+                        <h5 className="font-baloo font-semibold text-black text-[36px] md:mt-[3rem]">
                             Climate change news <br/>
                             and updates
                         </h5>
 
                         <img src={AboutRectangle} alt="AboutRectangle" className="mt-3"/>
 
-                        <p className="font-baloo font-normal text-[#848383] text-[18px] text-left mt-[1rem]">
+                        <p className="font-baloo font-normal text-[#848383] md:text-[18px] text-left mt-[1rem]">
                             Ut enim ad minima veniam, quis nostrum exercitationem <br/>
                             ullam corporis suscipit laboriosam, nisi ut al Ut enim ad <br/>
                             minima veniam, quis nostrum exercitationem ullam corporis <br/>
@@ -108,7 +108,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="text-center mt-[5rem]">
+                <div className="text-center mt-[2.5rem] md:mt-[5rem]">
                     <h4 className="font-baloo font-semibold text-black text-[45px]">
                         Sponsors & Partners
                     </h4>
@@ -142,7 +142,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="text-center mt-[5rem]">
+                <div className="text-center mt-[2.5rem] md:mt-[5rem]">
                     <h4 className="font-baloo font-semibold text-black text-[45px]">
                         Why it works
                     </h4>
@@ -157,7 +157,7 @@ const About = () => {
 
                         <h6 className="font-baloo font-semibold text-[24px] text-center mt-4 md:mt-6">24/7 support</h6>
 
-                        <p className="font-baloo font-normal text-[18px] text-[#848383] text-center mt-4 md:mt-6">
+                        <p className="font-baloo font-normal md:text-[18px] text-[#848383] text-center mt-4 md:mt-6">
                             MazingiraAI is always available and breaks <br/>
                             down barriers by providing knowledge <br/>
                             through conversation.
@@ -169,7 +169,7 @@ const About = () => {
 
                         <h6 className="font-baloo font-semibold text-[24px] text-center mt-4 md:mt-6">Engagement</h6>
 
-                        <p className="font-baloo font-normal text-[18px] text-[#848383] text-center mt-4 md:mt-6">
+                        <p className="font-baloo font-normal md:text-[18px] text-[#848383] text-center mt-4 md:mt-6">
                             Our conversation format of MazingiraAI <br/>
                             fosters engagement.
                         </p>
@@ -181,7 +181,7 @@ const About = () => {
                         <h6 className="font-baloo font-semibold text-[24px] text-center mt-4 md:mt-6">Learning &
                             Insights</h6>
 
-                        <p className="font-baloo font-normal text-[18px] text-[#848383] text-center mt-4 md:mt-6">
+                        <p className="font-baloo font-normal md:text-[18px] text-[#848383] text-center mt-4 md:mt-6">
                             MazingiraAI offers a tool to support <br/>
                             learning and provides insight on the <br/>
                             climate change.
