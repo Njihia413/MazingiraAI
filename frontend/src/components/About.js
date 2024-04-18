@@ -181,7 +181,7 @@ const About = () => {
                         <h6 className="font-baloo font-semibold text-[24px] text-center mt-4 md:mt-6">Learning &
                             Insights</h6>
 
-                        <p className="font-baloo font-normal md:text-[18px] text-[#848383] text-center mt-4 md:mt-6">
+                        <p className="font-baloo font-normal md:cd text-[18px] text-[#848383] text-center mt-4 md:mt-6">
                             MazingiraAI offers a tool to support <br/>
                             learning and provides insight on the <br/>
                             climate change.
