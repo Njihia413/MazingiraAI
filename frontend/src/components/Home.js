@@ -103,22 +103,26 @@ const Home = () => {
                         </p>
 
 
-                        <p className="font-baloo font-normal text-[#404852] text-[14px] mt-[1rem] md:mt-[2rem]">
-                            Explore our curated collection of articles delving deep into the intricate facets of&nbsp;
+                        <p className="font-baloo font-normal text-[#404852] text-[18px] mt-[1rem] md:mt-[2rem]">
+                            Explore our curated collection of articles delving deep into the&nbsp;
                             <span className="hidden md:inline">
                                 <br/>
                             </span>
-                            climate change, offering insights, solutions, and inspiration to catalyze meaningful&nbsp;
+                            intricate facets of climate change, offering insights, solutions,&nbsp;
                             <span className="hidden md:inline">
                                 <br/>
                             </span>
-                            action towards a greener, more sustainable future.
+                            and inspiration to catalyze meaningful action towards a greener,
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            more sustainable future.
                         </p>
 
                     </div>
 
                     <div className="mt-[5rem] md:mt-[10rem]">
-                        <div>
+                    <div>
                             <div className="flex">
                                 <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">01</p>
 
