@@ -112,7 +112,7 @@ const Home = () => {
                             <span className="hidden md:inline">
                                 <br/>
                             </span>
-                            and inspiration to catalyze meaningful action towards a greener,
+                            and inspiration to catalyze meaningful action towards a greener,&nbsp;
                             <span className="hidden md:inline">
                                 <br/>
                             </span>
