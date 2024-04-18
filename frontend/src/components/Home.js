@@ -21,7 +21,7 @@ const Home = () => {
                             in Real Time
                         </p>
 
-                        <p className="font-baloo font-normal text-[16px] text-[#21383E] md:mt-5 sm:mt-3">
+                        <p className="font-baloo font-normal text-[18px] text-[#21383E] md:mt-5 sm:mt-3">
                             Welcome to MazingiraAI – your gateway to real-time climate insights.&nbsp;
                             <span className="hidden md:inline">
                                 <br/>
