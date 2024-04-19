@@ -58,7 +58,7 @@ const Home = () => {
                         <img className="mt-[1.5rem] md:mt-[3rem]" src={Line} alt="Line"/>
 
                         <p className="mt-[1.5rem] md:mt-[3rem] font-baloo font-regular text-[18px] text-[#404852]">
-                            “Catalyze change with MazingiraAI, your dynamic hub for real-time&nbsp;
+                            Catalyze change with MazingiraAI, your dynamic hub for real-time&nbsp;
                             <span className="hidden md:inline">
                                 <br/>
                             </span>
@@ -66,7 +66,7 @@ const Home = () => {
                             <span className="hidden md:inline">
                                 <br/>
                             </span>
-                            sustainable tomorrow.”
+                            sustainable tomorrow.
                         </p>
 
 

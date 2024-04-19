@@ -44,10 +44,23 @@ const About = () => {
                         <img src={AboutRectangle} alt="AboutRectangle" className="mt-3"/>
 
                         <p className="font-baloo font-normal text-[#848383] md:text-[18px] text-left mt-[1rem]">
-                            Ut enim ad minima veniam, quis nostrum exercitationem <br/>
-                            ullam corporis suscipit laboriosam, nisi ut al Ut enim ad <br/>
-                            minima veniam, quis nostrum exercitationem ullam corporis <br/>
-                            suscipit laboriosam, nisi ut al.
+                            Journey alongside MazingiraAI, your expert guide through the&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            climate wilderness. With our seasoned insights and steadfast&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            support, we navigate the complexities of environmental&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            stewardship together, empowering you to make informed&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            decisions for a brighter future.
                         </p>
                     </div>
 
@@ -75,18 +88,32 @@ const About = () => {
                         <img src={AboutRectangle} alt="AboutRectangle" className="mt-3 ml-auto"/>
 
                         <p className="font-baloo font-normal text-[#848383] md:text-[18px] mt-[1rem] text-right">
-                            Ut enim ad minima veniam, quis nostrum exercitationem <br/>
-                            ullam corporis suscipit laboriosam, nisi ut al Ut enim ad <br/>
-                            minima veniam, quis nostrum exercitationem ullam corporis <br/>
-                            suscipit laboriosam, nisi ut al.
+                            Unlock the power of personalized sustainability with&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            MazingiraAI. Our platform is your compass in the journey&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            towards a greener world, offering tailored insights and&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            guidance to navigate the complexities of sustainability&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            with confidence and purpose.
                         </p>
+
                     </div>
                 </div>
 
 
                 <div className="grid md:grid-cols-2 mt-[2rem] gap-24">
                     <div className="mx-auto p-6">
-                        <h5 className="font-baloo font-semibold text-black text-[36px] md:mt-[3rem]">
+                        <h5 className="font-baloo font-semibold text-black text-[30px] md:text-[36px] md:mt-[3rem]">
                             Climate change news <br/>
                             and updates
                         </h5>
@@ -94,11 +121,21 @@ const About = () => {
                         <img src={AboutRectangle} alt="AboutRectangle" className="mt-3"/>
 
                         <p className="font-baloo font-normal text-[#848383] md:text-[18px] text-left mt-[1rem]">
-                            Ut enim ad minima veniam, quis nostrum exercitationem <br/>
-                            ullam corporis suscipit laboriosam, nisi ut al Ut enim ad <br/>
-                            minima veniam, quis nostrum exercitationem ullam corporis <br/>
-                            suscipit laboriosam, nisi ut al.
+                        Dive into the pulse of the planet with MazingiraAI's latest&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            dispatches. From breaking developments to innovative&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            solutions our updates keep you ahead of the curve in the&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            ever-changing landscape of climate change.
                         </p>
+
                     </div>
 
                     <div className="hidden md:block">
