@@ -21,13 +21,17 @@ const Home = () => {
                             in Real Time
                         </p>
 
-                        <p className="font-baloo font-normal text-[20px] text-[#21383E] md:mt-5 sm:mt-3">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do <br/> eiusmod tempor
-                            incididunt
-                            ut labore
+                        <p className="font-baloo font-normal text-[18px] text-[#21383E] md:mt-5 sm:mt-3">
+                            Welcome to MazingiraAI – your gateway to real-time climate insights.&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            Let's make a difference together!
                         </p>
 
-                        <img className="md:h-[502px] w-[502px] sm:h-[400px] md:[1.5rem] md:mt-[3rem] hidden sm:block" alt="HomeImg2"
+
+                        <img className="md:h-[502px] w-[502px] sm:h-[400px] md:[1.5rem] md:mt-[3rem] hidden sm:block"
+                             alt="HomeImg2"
                              src={HomeImg2}/>
                     </div>
 
@@ -39,18 +43,32 @@ const Home = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                     <div className="mt-[5rem] md:mt-[10rem]">
                         <p className="font-baloo font-semibold text-black text-[25px] md:text-[50px]">
-                            Chat with MazingiraAI <br/>
-                            anytime, anywhere on <br/>
+                            Chat with MazingiraAI&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            anytime, anywhere on&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
                             matters with Climate
                         </p>
 
+
                         <img className="mt-[1.5rem] md:mt-[3rem]" src={Line} alt="Line"/>
 
-                        <p className="mt-[1.5rem] md:mt-[3rem] font-baloo font-regular text-[14px] text-[#404852]">
-                            “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do <br/>
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim <br/>
-                            ad minim veniam.”
+                        <p className="mt-[1.5rem] md:mt-[3rem] font-baloo font-regular text-[18px] text-[#404852]">
+                            Catalyze change with MazingiraAI, your dynamic hub for real-time&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            climate knowledge and impactful actions, guiding us towards a resilient,&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            sustainable tomorrow.
                         </p>
+
 
                         <div className="flex items-center">
                             <img className="mt-[1.5rem] md:mt-[3rem] rounded-full" src={Person} alt="Line"/>
@@ -73,25 +91,43 @@ const Home = () => {
                 <div className="grid md:grid-cols-2 gap-4">
                     <div className="mt-[5rem] md:mt-[10rem]">
                         <p className="font-baloo font-semibold text-[30px] md:text-[60px] text-black">
-                            Browse our <br/>
-                            articles on Climate
+                            Browse our&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            articles on Climate&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
                             change
                         </p>
 
-                        <p className="font-baloo font-normal text-[#404852] text-[14px] mt-[1rem] md:mt-[2rem]">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do <br/>
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua. <br/>
-                            Ut enim ad minim veniam.
+
+                        <p className="font-baloo font-normal text-[#404852] text-[18px] mt-[1rem] md:mt-[2rem]">
+                            Explore our curated collection of articles delving deep into the&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            intricate facets of climate change, offering insights, solutions,&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            and inspiration to catalyze meaningful action towards a greener,&nbsp;
+                            <span className="hidden md:inline">
+                                <br/>
+                            </span>
+                            more sustainable future.
                         </p>
+
                     </div>
 
                     <div className="mt-[5rem] md:mt-[10rem]">
-                        <div>
+                    <div>
                             <div className="flex">
                                 <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">01</p>
 
-                                <p className="font-baloo font-normal text-[40px] text-black px-10">
-                                    Lorem Ipsum
+                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                    Understanding Climate Change: A Comprehensive Overview
                                 </p>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -105,7 +141,7 @@ const Home = () => {
                             </div>
 
                             <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Lorem ipsum dolor sit amet
+                                Exploring the Causes, Impacts, and Solutions
                             </p>
 
                             <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
@@ -115,8 +151,8 @@ const Home = () => {
                             <div className="flex">
                                 <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">02</p>
 
-                                <p className="font-baloo font-normal text-[40px] text-black px-10">
-                                    Lorem Ipsum
+                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                    The Role of Renewable Energy in Combatting Climate Change
                                 </p>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -130,7 +166,7 @@ const Home = () => {
                             </div>
 
                             <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Lorem ipsum dolor sit amet
+                                Harnessing Nature's Power for a Sustainable Future
                             </p>
 
                             <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
@@ -140,8 +176,8 @@ const Home = () => {
                             <div className="flex">
                                 <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">03</p>
 
-                                <p className="font-baloo font-normal text-[40px] text-black px-10">
-                                    Lorem Ipsum
+                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                    Adapting Agriculture to a Changing Climate
                                 </p>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -155,7 +191,7 @@ const Home = () => {
                             </div>
 
                             <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Lorem ipsum dolor sit amet
+                                Innovative Strategies for Resilient Food Systems
                             </p>
 
                             <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
@@ -165,8 +201,8 @@ const Home = () => {
                             <div className="flex">
                                 <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">04</p>
 
-                                <p className="font-baloo font-normal text-[40px] text-black px-10">
-                                    Lorem Ipsum
+                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                    Protecting Biodiversity in the Face of Climate Crisis
                                 </p>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -180,7 +216,7 @@ const Home = () => {
                             </div>
 
                             <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Lorem ipsum dolor sit amet
+                                Preserving Ecosystems for a Thriving Planet
                             </p>
 
                             <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
@@ -190,8 +226,8 @@ const Home = () => {
                             <div className="flex">
                                 <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">05</p>
 
-                                <p className="font-baloo font-normal text-[40px] text-black px-10">
-                                    Lorem Ipsum
+                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                    Community-Led Climate Action: Inspiring Stories from Around the Globe
                                 </p>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -205,7 +241,7 @@ const Home = () => {
                             </div>
 
                             <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Lorem ipsum dolor sit amet
+                                Local Solutions, Global Impact
                             </p>
 
                             <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
