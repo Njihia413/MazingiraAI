@@ -9,3 +9,6 @@ HASHING PASSWORDS WITH BCRYPT
 
 HOW JWT TOKEN WORKS IN FLASK
     https://4geeks.com/lesson/what-is-JWT-and-how-to-implement-with-Flask
+
+RELATIONSHIP PATTERNS IN SQL ALCHEMY
+    https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
