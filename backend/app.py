@@ -84,19 +84,6 @@ def get_users():
   except Exception as e:
     return make_response(jsonify({'message': 'error getting users'}), 500)
 
-# get a user by id
-@app.route('/users/<int:id>', methods=['GET'])
-@jwt_required()
-def get_user(id):
-  try:
-    user_id = get_jwt_identity()
-    user = User.query.filter_by(id=user_id).first()
-    if user:
-      return make_response(jsonify({'user': user.json()}), 200)
-    return make_response(jsonify({'message': 'user not found'}), 404)
-  except Exception as e:
-    return make_response(jsonify({'message': 'error getting user'}), 500)
-
 # update a user
 @app.route('/users/<int:id>', methods=['PUT'])
 @jwt_required()
