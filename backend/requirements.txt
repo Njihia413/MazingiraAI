@@ -1,0 +1,5 @@
+flask
+flask-bcrypt
+Flask-JWT-Extended
+psycopg2-binary
+Flask-SQLAlchemy

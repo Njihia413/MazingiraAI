@@ -1,0 +1,11 @@
+SETTING UP SIMPLE REST API USING FLASK
+    https://medium.com/@francescociullaroma/build-a-crud-rest-api-in-python-using-flask-sqlalchemy-postgres-docker-cea0eee02ccb
+
+IMPLEMENTING AUTHORIZATION
+    https://www.freecodecamp.org/news/jwt-authentication-in-flask/
+
+HASHING PASSWORDS WITH BCRYPT
+    https://www.geeksforgeeks.org/password-hashing-with-bcrypt-in-flask/
+
+HOW JWT TOKEN WORKS IN FLASK
+    https://4geeks.com/lesson/what-is-JWT-and-how-to-implement-with-Flask
