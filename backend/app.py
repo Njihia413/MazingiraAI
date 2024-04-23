@@ -3,9 +3,11 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 from flask_bcrypt import Bcrypt 
 from flask_sqlalchemy import SQLAlchemy
 from os import environ
-
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}}) # This will enable CORS for all routes
+
 
 # Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
@@ -26,28 +28,33 @@ class User(db.Model):
   __tablename__ = 'users'
 
   id = db.Column(db.Integer, primary_key=True)
-  username = db.Column(db.String(80), unique=True, nullable=False)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.Text(), unique=True, nullable=False)
+  full_name = db.Column(db.Text(), unique=False, nullable=True)
 
   def json(self):
-    return {'id': self.id,'username': self.username, 'email': self.email}
+    return {'id': self.id, 'email': self.email, 'full_name': self.full_name}
 
 db.create_all()
 
+# @app.before_request
+# def before_request():
+#   headers = {'Access-Control-Allow-Origin': '*',
+#               'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+#               'Access-Control-Allow-Headers': 'Content-Type'}
+#   if request.method.lower() == 'options':
+#     return jsonify(headers), 200
+
 #create a test route
-@app.route('/test', methods=['GET'])
+@app.route('/api/test', methods=['GET'])
 def test():
   return make_response(jsonify({'message': 'test route'}), 200)
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
   data = request.get_json()
-  username = data['username']
-  password = data['password']
-  print('Received data:', username , password)
 
-  user = User.query.filter_by(username=username).first()
+  user = User.query.filter_by(email=data['email']).first()
 
   if user and bcrypt.check_password_hash(user.password, password):
     access_token = create_access_token(identity=user.id)
@@ -55,18 +62,18 @@ def login():
   else:
     return make_response(jsonify({'message': 'Login Failed'}), 401)
 
-@app.route('/logout', methods=['POST'])
+@app.route('/api/logout', methods=['POST'])
 @jwt_required()
 def logout():
   pass
 
 # create a user
-@app.route('/signup', methods=['POST'])
+@app.route('/api/signup', methods=['POST'])
 def create_user():
   try:
     data = request.get_json()
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    user = User(username=data['username'], email=data['email'], password=hashed_password)
+    user = User(email=data['email'], full_name=data['full_name'], password=hashed_password)
     db.session.add(user)
     db.session.commit()
     access_token = create_access_token(identity=user.id)
@@ -75,7 +82,7 @@ def create_user():
     return make_response(jsonify({'message': 'error creating user'}), 500)
 
 # get all users
-@app.route('/users', methods=['GET'])
+@app.route('/api/users', methods=['GET'])
 @jwt_required()
 def get_users():
   try:
@@ -85,7 +92,7 @@ def get_users():
     return make_response(jsonify({'message': 'error getting users'}), 500)
 
 # update a user
-@app.route('/users/<int:id>', methods=['PUT'])
+@app.route('/api/users/<int:id>', methods=['PUT'])
 @jwt_required()
 def update_user(id):
   try:
@@ -93,7 +100,6 @@ def update_user(id):
     user = User.query.filter_by(id=user_id).first()
     if user:
       data = request.get_json()
-      user.username = data['username']
       user.email = data['email']
       db.session.commit()
       return make_response(jsonify({'message': 'user updated'}), 200)
@@ -102,7 +108,7 @@ def update_user(id):
     return make_response(jsonify({'message': 'error updating user'}), 500)
 
 # delete a user
-@app.route('/users/<int:id>', methods=['DELETE'])
+@app.route('/api/users/<int:id>', methods=['DELETE'])
 @jwt_required()
 def delete_user(id):
   try:

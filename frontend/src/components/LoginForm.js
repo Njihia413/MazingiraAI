@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useReducer } from "react";
 import Line2 from "../assets/images/Line2.png";
+import { apiHost } from "../utils/vars";
+import { objectReducer } from "../utils/reducers";
+
 
 const LoginForm = () => {
+    const [state, dispatch] = useReducer(objectReducer, {email: '', password: ''})
+
+    function handleLogin(e){
+        e.preventDefault()
+        
+        fetch(`${apiHost}/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(state),
+        }).then(res => {
+            console.log(res.json())
+            if(res.ok){
+                console.log(res.json())
+                // localStorage.setItem('accessToken', res.json())
+            }
+        })
+    }
+
     return (
-        <form className="max-w-xl mt-[2rem]">
+        <form className="max-w-xl mt-[2rem]" onSubmit={handleLogin}>
             <div className="mb-5">
                 <label htmlFor="email" className="block mb-2 text-[18px] font-baloo font-medium text-[#718096]">
                     E-mail
                 </label>
-                <input type="email" id="email"
+                <input type="email"
+                        id="email"
                        className="bg-white border border-[#CBD5E0] font-baloo font-normal text-[#4A5568] text-[16px] rounded-[12px] w-full p-3"
-                       placeholder="eg email@gmail.com" required/>
+                       placeholder="eg email@gmail.com" required
+                       value={state.email}
+                       onChange={(e)=>dispatch({'email': e.target.value})}/>
             </div>
 
             <div className="mb-5">
@@ -20,7 +46,9 @@ const LoginForm = () => {
                 <input type="password" id="password"
                        className="bg-white border border-[#CBD5E0] font-baloo font-normal text-[#4A5568] text-[16px] rounded-[12px] w-full p-3"
                        placeholder="@#*%"
-                       required/>
+                       required
+                       value={state.password}
+                       onChange={(e)=>dispatch({'password': e.target.value})}/>
             </div>
 
             <div className="flex items-center justify-between mb-5">

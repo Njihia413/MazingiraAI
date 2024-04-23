@@ -1,16 +1,44 @@
-import React from "react";
+import React, { useReducer } from "react";
 import Line2 from "../assets/images/Line2.png";
+import { objectReducer } from "../utils/reducers";
+import { apiHost } from "../utils/vars";
 
 const SignupForm = () => {
+    const [state, dispatch] = useReducer(objectReducer, {full_name: '', email: '', password: '', confirm_password: ''})
+
+    function handleSignup(e){
+        e.preventDefault()
+
+        if(state.password === state.confirm_password){
+            fetch(`${apiHost}/signup`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(state),
+            }).then(res => {
+                console.log(res.json())
+                if(res.ok){
+                    console.log(res.json())
+                    // localStorage.setItem('accessToken', res.json())
+                }
+            })
+        } else {
+            alert(`Passwords don't match`)
+        }
+    }
+
     return (
-        <form className="max-w-xl mt-[2rem]">
+        <form className="max-w-xl mt-[2rem]" onSubmit={handleSignup}>
             <div className="mb-5">
                 <label htmlFor="email" className="block mb-2 text-[18px] font-baloo font-medium text-[#718096]">
                     Full Names
                 </label>
                 <input type="text" id="fullNames"
                        className="bg-white border border-[#CBD5E0] font-baloo font-normal text-[#4A5568] text-[16px] rounded-[12px] w-full p-3"
-                       placeholder="eg Jane Doe" required/>
+                       placeholder="eg Jane Doe" required
+                       value={state.full_name}
+                       onChange={(e)=>dispatch({'full_name': e.target.value})}/>
             </div>
 
             <div className="mb-5">
@@ -19,7 +47,9 @@ const SignupForm = () => {
                 </label>
                 <input type="email" id="email"
                        className="bg-white border border-[#CBD5E0] font-baloo font-normal text-[#4A5568] text-[16px] rounded-[12px] w-full p-3"
-                       placeholder="eg email@gmail.com" required/>
+                       placeholder="eg email@gmail.com" required
+                       value={state.email}
+                       onChange={(e)=>dispatch({'email': e.target.value})}/>
             </div>
 
             <div className="mb-5">
@@ -29,7 +59,9 @@ const SignupForm = () => {
                 <input type="password" id="password"
                        className="bg-white border border-[#CBD5E0] font-baloo font-normal text-[#4A5568] text-[16px] rounded-[12px] w-full p-3"
                        placeholder="@#*%"
-                       required/>
+                       required
+                       value={state.password}
+                       onChange={(e)=>dispatch({'password': e.target.value})}/>
             </div>
 
             <div className="mb-5">
@@ -39,7 +71,9 @@ const SignupForm = () => {
                 <input type="confirmPassword" id="confirmPassword"
                        className="bg-white border border-[#CBD5E0] font-baloo font-normal text-[#4A5568] text-[16px] rounded-[12px] w-full p-3"
                        placeholder="@#*%"
-                       required/>
+                       required
+                       value={state.confirm_password}
+                       onChange={(e)=>dispatch({'confirm_password': e.target.value})}/>
             </div>
 
 
