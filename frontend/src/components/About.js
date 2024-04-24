@@ -26,7 +26,7 @@ const About = () => {
             </div>
 
             <div className="container mx-auto bg-white">
-                <div className="text-center mt-[5rem]">
+                <div className="text-center mt-[2.5rem] md:mt-[5rem]">
                     <h4 className="font-baloo font-semibold text-black text-[35px] md:text-[45px]">
                         Because a sustainable future starts with a conversation
                     </h4>
@@ -34,7 +34,7 @@ const About = () => {
                     <img src={Group} alt="Group" className="mx-auto mt-3"/>
                 </div>
 
-                <div className="grid md:grid-cols-2 mt-[2rem] gap-24">
+                <div className="grid md:grid-cols-2 md:mt-[2rem] gap-24">
                     <div className="mx-auto p-6">
                         <h5 className="font-baloo font-semibold text-black text-[30px] md:text-[36px] md:mt-[3rem]">
                             Knowledgeable <br/>
@@ -72,7 +72,7 @@ const About = () => {
                 </div>
 
 
-                <div className="grid md:grid-cols-2 mt-[2rem] ">
+                <div className="grid md:grid-cols-2 md:mt-[2rem]">
                     <div className="hidden md:block">
                         <div className="mr-auto">
                             <img src={About2} alt="About2"/>
@@ -110,7 +110,7 @@ const About = () => {
                 </div>
 
 
-                <div className="grid md:grid-cols-2 mt-[2rem] gap-24">
+                <div className="grid md:grid-cols-2 md:mt-[2rem] gap-24">
                     <div className="mx-auto p-6">
                         <h5 className="font-baloo font-semibold text-black text-[30px] md:text-[36px] md:mt-[3rem]">
                             Climate change news <br/>
@@ -143,7 +143,7 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="text-center mt-[2.5rem] md:mt-[5rem]">
+                <div className="text-center mt-[1rem] md:mt-[5rem]">
                     <h4 className="font-baloo font-semibold text-black text-[45px]">
                         Sponsors & Partners
                     </h4>
@@ -177,12 +177,12 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="text-center mt-[2.5rem] md:mt-[5rem]">
+                <div className="text-center mt-[1rem] md:mt-[5rem]">
                     <h4 className="font-baloo font-semibold text-black text-[45px]">
                         Why it works
                     </h4>
 
-                    <img src={Group} alt="Group" className="mx-auto mt-3"/>
+                    <img src={Group} alt="Group" className="mx-auto mt-3 mb-4"/>
                 </div>
 
 
