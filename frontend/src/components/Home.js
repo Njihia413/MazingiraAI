@@ -14,7 +14,7 @@ const Home = () => {
             <Navbar/>
             <div className="container mx-auto bg-white md:p-0 p-6">
                 <div className="grid md:grid-cols-2 gap-8">
-                    <div className="mt-[2.5rem] md:mt-[5rem]">
+                    <div className="md:mt-[5rem]">
                         <p className="font-baloo font-semibold text-black text-[30px] md:text-[60px]">
                             Let’s Connect <br/>
                             with our Environment <br/>

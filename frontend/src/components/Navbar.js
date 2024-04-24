@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import Logo from "../assets/images/Logo.png";
 
 const Navbar = () => {
@@ -12,10 +12,10 @@ const Navbar = () => {
     return (
         <nav className="container mx-auto bg-white border-gray-200">
             <div className="flex flex-wrap items-center justify-between py-4">
-                <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer">
+                <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer">
                     <img className="h-16" alt="Logo" src={Logo} />
                     <p className="font-bold font-baloo py-4 text-[20px]">MazingiraAI</p>
-                </a>
+                </Link>
 
                 <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button
@@ -96,15 +96,23 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         <li className="md:hidden block">
-                            <div className="font-baloo font-normal text-black text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden">
-                                <a href="/login">Log in</a>
+                            {/*<div className="font-baloo font-normal text-black text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden">*/}
+                            {/*    <a href="/login">Log in</a>*/}
+                            {/*</div>*/}
+                            <div className="flex flex-col">
+                                <button
+                                    type="button"
+                                    className="text-[#00BB1E] bg-brownBackground  w-[111px] h-[49px] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px] mb-4"
+                                >
+                                    <Link to="/login">Log in</Link>
+                                </button>
+                                <button
+                                    type="button"
+                                    className="text-[#00BB1E] bg-brownBackground  w-[111px] h-[49px] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px]"
+                                >
+                                    <Link to="/signup">Sign up</Link>
+                                </button>
                             </div>
-                            <button
-                                type="button"
-                                className="text-[#00BB1E] bg-brownBackground  w-[111px] h-[49px] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px]"
-                            >
-                                <a href="/signup">Sign up</a>
-                            </button>
                         </li>
                     </ul>
                 </div>

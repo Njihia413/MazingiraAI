@@ -2,23 +2,23 @@ import React from "react";
 import Logo from "../assets/images/Logo.png";
 import LoginImg from "../assets/images/Signin.png";
 import LoginForm from "./LoginForm";
+import {Link} from "react-router-dom";
 
 const Login = () => {
     return (
         <section>
             <div className="min-h-screen grid md:grid-cols-2">
                 <div className="p-10">
-                    <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer">
-                        <img className="h-16" alt="Logo" src={Logo}/>
+                    <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer">
+                        <img className="h-16" alt="Logo" src={Logo} />
                         <p className="font-bold font-baloo py-4 text-[20px]">MazingiraAI</p>
-                    </a>
+                    </Link>
 
                     <p className="font-baloo font-black text-[48px] text-black mt-[2rem]">Sign in</p>
 
                     <p className="font-baloo font-normal text-[18px] text-[#718096] mt-[2rem]">
-                        Don't have an account? <a href="/signup"
-                                                  className="text-[#00BB1E] font-medium underline hover:no-underline">Create
-                        now</a>
+                        Don't have an account?&nbsp;
+                        <Link to="/signup" className="text-[#00BB1E] font-medium underline hover:no-underline">Create now</Link>
                     </p>
 
                     <LoginForm/>

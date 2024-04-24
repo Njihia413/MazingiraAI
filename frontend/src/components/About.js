@@ -106,7 +106,6 @@ const About = () => {
                             </span>
                             with confidence and purpose.
                         </p>
-
                     </div>
                 </div>
 
@@ -135,7 +134,6 @@ const About = () => {
                             </span>
                             ever-changing landscape of climate change.
                         </p>
-
                     </div>
 
                     <div className="hidden md:block">
