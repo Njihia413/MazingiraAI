@@ -17,10 +17,14 @@ const LoginForm = () => {
             },
             body: JSON.stringify(state),
         }).then(res => {
-            console.log(res.json())
             if(res.ok){
-                console.log(res.json())
-                // localStorage.setItem('accessToken', res.json())
+                res.json().then(d => {
+                    const data = {
+                        user: state,
+                        accessToken: d.access_token
+                    }
+                    localStorage.setItem('data', btoa(JSON.stringify(data)))
+                })
             }
         })
     }

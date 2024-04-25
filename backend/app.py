@@ -4,10 +4,12 @@ from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from os import environ
 from flask_cors import CORS
+import contextlib
+from sqlalchemy import MetaData, create_engine
+from sqlalchemy.ext.declarative import declarative_base
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}}) # This will enable CORS for all routes
-
 
 # Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
@@ -24,9 +26,21 @@ jwt = JWTManager(app)
 # bcrypt initialization
 bcrypt = Bcrypt(app) 
 
+# delete tables
+engine = create_engine(environ.get('DB_URL'))
+def drop_table(table_name, engine=engine):
+  Base = declarative_base()
+  metadata = MetaData()
+  metadata.reflect(bind=engine)
+  table = metadata.tables[table_name]
+  if table is not None:
+    Base.metadata.drop_all(engine, [table], checkfirst=True)
+
+drop_table('users')
+
 class User(db.Model):
   __tablename__ = 'users'
-
+  
   id = db.Column(db.Integer, primary_key=True)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.Text(), unique=True, nullable=False)
@@ -56,7 +70,7 @@ def login():
 
   user = User.query.filter_by(email=data['email']).first()
 
-  if user and bcrypt.check_password_hash(user.password, password):
+  if user and bcrypt.check_password_hash(user.password, data['password']):
     access_token = create_access_token(identity=user.id)
     return make_response(jsonify({'message': 'Login Success', 'access_token': access_token}), 200)
   else:
@@ -70,16 +84,16 @@ def logout():
 # create a user
 @app.route('/api/signup', methods=['POST'])
 def create_user():
-  try:
-    data = request.get_json()
-    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    user = User(email=data['email'], full_name=data['full_name'], password=hashed_password)
-    db.session.add(user)
-    db.session.commit()
-    access_token = create_access_token(identity=user.id)
-    return make_response(jsonify({'message': 'signup successful!', 'access_token': access_token}), 201)
-  except Exception as e:
-    return make_response(jsonify({'message': 'error creating user'}), 500)
+  # try:
+  data = request.get_json()
+  hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+  user = User(email=data['email'], full_name=data['full_name'], password=hashed_password)
+  db.session.add(user)
+  db.session.commit()
+  access_token = create_access_token(identity=user.id)
+  return make_response(jsonify({'message': 'signup successful!', 'access_token': access_token}), 201)
+  # except Exception as e:
+  #   return make_response(jsonify({'message': 'error creating user'}), 500)
 
 # get all users
 @app.route('/api/users', methods=['GET'])

@@ -1,4 +1,4 @@
-const apiHost = 'localhost:4000/api'
+const apiHost = 'http://localhost:4000/api'
 
 export {
     apiHost
