@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "../assets/images/Logo.png";
 import LoginImg from "../assets/images/Signin.png";
 import LoginForm from "./LoginForm";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import { UserContext } from "../context/user";
+import { useContext } from "react";
 
 const Login = () => {
+    const { loggedIn } = useContext(UserContext)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(loggedIn){
+            navigate('/chat')
+        }
+    }, [loggedIn])
+    
     return (
         <section>
             <div className="min-h-screen grid md:grid-cols-2">

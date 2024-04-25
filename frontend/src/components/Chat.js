@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import { IoIosAdd } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
@@ -7,8 +7,20 @@ import { CiSearch } from "react-icons/ci";
 import { RiAttachment2 } from "react-icons/ri";
 import { HiOutlineEmojiSad } from "react-icons/hi";
 import { GrSend } from "react-icons/gr";
+import { UserContext } from "../context/user";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Chat() {
+  const { loggedIn } = useContext(UserContext)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if(!loggedIn){
+      navigate('/home')
+    }
+  }, [loggedIn])
+
   return (
     <>
       <div className="chat h-screen">

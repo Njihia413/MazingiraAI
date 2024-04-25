@@ -2,10 +2,15 @@ import React, { useReducer } from "react";
 import Line2 from "../assets/images/Line2.png";
 import { apiHost } from "../utils/vars";
 import { objectReducer } from "../utils/reducers";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/user";
 
 
 const LoginForm = () => {
     const [state, dispatch] = useReducer(objectReducer, {email: '', password: ''})
+    const { setLoggedIn } = useContext(UserContext)
+    const navigate = useNavigate()
 
     function handleLogin(e){
         e.preventDefault()
@@ -24,6 +29,8 @@ const LoginForm = () => {
                         accessToken: d.access_token
                     }
                     localStorage.setItem('data', btoa(JSON.stringify(data)))
+                    setLoggedIn(true)
+                    navigate('/chat')
                 })
             }
         })
