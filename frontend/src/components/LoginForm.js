@@ -9,7 +9,7 @@ import { UserContext } from "../context/user";
 
 const LoginForm = () => {
     const [state, dispatch] = useReducer(objectReducer, {email: '', password: ''})
-    const { setLoggedIn } = useContext(UserContext)
+    const { setLoggedIn, setUserData } = useContext(UserContext)
     const navigate = useNavigate()
 
     function handleLogin(e){
@@ -25,10 +25,11 @@ const LoginForm = () => {
             if(res.ok){
                 res.json().then(d => {
                     const data = {
-                        user: state,
+                        user: d.user,
                         accessToken: d.access_token
                     }
                     localStorage.setItem('data', btoa(JSON.stringify(data)))
+                    setUserData(data)
                     setLoggedIn(true)
                     navigate('/chat')
                 })

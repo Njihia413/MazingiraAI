@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
     const [state, dispatch] = useReducer(objectReducer, {full_name: '', email: '', password: '', confirm_password: ''})
-    const { setLoggedIn} = useContext(UserContext)
+    const { setLoggedIn, setUserData } = useContext(UserContext)
     const navigate = useNavigate()
 
     function handleSignup(e){
@@ -25,10 +25,11 @@ const SignupForm = () => {
                 if(res.ok){
                     res.json().then(d => {
                         const data = {
-                            user: state,
+                            user: d.user,
                             accessToken: d.access_token
                         }
                         localStorage.setItem('data', btoa(JSON.stringify(data)))
+                        setUserData(data)
                         setLoggedIn(true)
                         navigate('/chat')
                     })

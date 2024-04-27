@@ -9,10 +9,11 @@ import { UserContext } from "../context/user";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('data'))
+  const [userData, setUserData] = useState(JSON.parse(atob(localStorage.getItem('data')) || null) || {})
   
   return (
     <div className="App">
-      <UserContext.Provider value={{loggedIn, setLoggedIn}}>
+      <UserContext.Provider value={{loggedIn, setLoggedIn, userData, setUserData}}>
         <Routes>
             <Route path="/home" element={<Home/>}/>
             <Route path="/chat" element={<Chat/>}/>
