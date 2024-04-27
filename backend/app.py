@@ -36,7 +36,10 @@ def drop_table(table_name, engine=engine):
   if table is not None:
     Base.metadata.drop_all(engine, [table], checkfirst=True)
 
+drop_table('messages')
+drop_table('chats')
 drop_table('users')
+
 
 class User(db.Model):
   __tablename__ = 'users'
@@ -45,9 +48,41 @@ class User(db.Model):
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.Text(), unique=True, nullable=False)
   full_name = db.Column(db.Text(), unique=False, nullable=True)
+  chats = db.relationship('Chat', cascade = "all,delete", backref='users')
 
   def json(self):
-    return {'id': self.id, 'email': self.email, 'full_name': self.full_name}
+    return {'id': self.id, 'email': self.email, 'full_name': self.full_name, 'chats': [chat.json() for chat in self.chats]}
+
+  def __repr__(self):
+    return f'<User "{self.email}">'
+
+class Chat(db.Model):
+  __tablename__ = 'chats'
+
+  id = db.Column(db.Integer, primary_key=True)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  messages = db.relationship('Message', cascade = "all,delete", backref='chats')
+
+  def json(self):
+    return {'id': self.id, 'user_id': self.user_id, 'messages': [message.json() for message in self.messages]}
+
+  def __repr__(self):
+    return f'<Chat "{self.id}">'
+
+
+class Message(db.Model):
+  __tablename__ = 'messages'
+
+  id = db.Column(db.Integer, primary_key=True)
+  chat_id = db.Column(db.Integer, db.ForeignKey('chats.id'))
+  question = db.Column(db.Text)
+  answer = db.Column(db.Text)
+
+  def json(self):
+    return {'id': self.id, 'chat_id': self.chat_id, 'question': self.question, 'answer': self.answer}
+
+  def __repr__(self):
+    return f'<Message "{self.question[:20]}...">'
 
 db.create_all()
 
@@ -67,14 +102,23 @@ def test():
 @app.route('/api/login', methods=['POST'])
 def login():
   data = request.get_json()
-
   user = User.query.filter_by(email=data['email']).first()
-
   if user and bcrypt.check_password_hash(user.password, data['password']):
     access_token = create_access_token(identity=user.id)
-    return make_response(jsonify({'message': 'Login Success', 'access_token': access_token}), 200)
+    return make_response(jsonify({'user': user.json(), 'access_token': access_token}), 200)
   else:
     return make_response(jsonify({'message': 'Login Failed'}), 401)
+
+@app.route('/api/me', methods=['GET'])
+@jwt_required()
+def get_me():
+  user_id = get_jwt_identity()
+  user = User.query.filter_by(id=user_id).first()
+  if user:
+    access_token = create_access_token(identity=user.id)
+    return make_response(jsonify({'user': user.json(), 'access_token': access_token}), 200)
+  else:
+    return make_response(jsonify({'message': 'unauthorized'}), 401)
 
 @app.route('/api/logout', methods=['POST'])
 @jwt_required()
@@ -91,7 +135,7 @@ def create_user():
   db.session.add(user)
   db.session.commit()
   access_token = create_access_token(identity=user.id)
-  return make_response(jsonify({'message': 'signup successful!', 'access_token': access_token}), 201)
+  return make_response(jsonify({'user': user.json(), 'access_token': access_token}), 201)
   # except Exception as e:
   #   return make_response(jsonify({'message': 'error creating user'}), 500)
 
@@ -103,6 +147,7 @@ def get_users():
     users = User.query.all()
     return make_response(jsonify([user.json() for user in users]), 200)
   except Exception as e:
+    print(e)
     return make_response(jsonify({'message': 'error getting users'}), 500)
 
 # update a user
@@ -135,3 +180,69 @@ def delete_user(id):
     return make_response(jsonify({'message': 'user not found'}), 404)
   except Exception as e:
     return make_response(jsonify({'message': 'error deleting user'}), 500)
+
+# create chat
+@app.route('/api/chats', methods=['POST'])
+@jwt_required()
+def create_chat():
+  data = request.get_json()
+  try:
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+      chat = Chat(user_id=user_id)
+      db.session.add(chat)
+      db.session.commit()
+      return make_response(jsonify({'chat': chat.json()}), 200)
+    return make_response(jsonify({'message': 'unauthorized'}), 401)
+  except Exception as e:
+    return make_response(jsonify({'message': 'error creating chat'}), 500)
+
+# get chats
+@app.route('/api/chats', methods=['GET'])
+@jwt_required()
+def get_chats():
+  data = request.get_json()
+  try:
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+      chats = user.chats
+      return make_response(jsonify([chat.json() for chat in chats]), 200)
+    return make_response(jsonify({'message': 'unauthorized'}), 401)
+  except Exception as e:
+    return make_response(jsonify({'message': 'error creating chat'}), 500)
+
+# get chat
+@app.route('/api/chats/<int:id>', methods=['GET'])
+@jwt_required()
+def get_chat(id):
+  data = request.get_json()
+  try:
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+      chat = [chat for chat in user.chats if chat.id == id]
+      if len(chat) == 1:
+        chat = chat[0]
+        return make_response(jsonify({'chat': chat.json()}), 200)
+    return make_response(jsonify({'message': 'unauthorized'}), 401)
+  except Exception as e:
+    return make_response(jsonify({'message': 'error creating chat'}), 500)
+
+# create messages
+@app.route('/api/messages', methods=['POST'])
+@jwt_required()
+def create_message():
+  data = request.get_json()
+  try:
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+      message = Message(chat_id=data['chat_id'], question=data['question'], answer=data['answer'])
+      db.session.add(message)
+      db.session.commit()
+      return make_response(jsonify({'message': message.json()}), 200)
+    return make_response(jsonify({'message': 'unauthorized'}), 401)
+  except Exception as e:
+    return make_response(jsonify({'message': 'error creating chat'}), 500)
