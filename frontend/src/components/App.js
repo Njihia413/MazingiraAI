@@ -8,8 +8,10 @@ import { useState } from "react";
 import { UserContext } from "../context/user";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('data'))
-  const [userData, setUserData] = useState(JSON.parse(atob(localStorage.getItem('data')) || null) || {})
+  const data = localStorage.getItem('data')
+  const localStorageData = data? JSON.parse(atob(localStorage.getItem('data'))) : {}
+  const [loggedIn, setLoggedIn] = useState(!!data)
+  const [userData, setUserData] = useState(localStorageData)
   
   return (
     <div className="App">
