@@ -32,12 +32,11 @@ def drop_table(table_name, engine=engine):
   Base = declarative_base()
   metadata = MetaData()
   metadata.reflect(bind=engine)
-  table = metadata.tables[table_name]
-  if table is not None:
+
+  if table_name in metadata.tables.keys():
+    table = metadata.tables[table_name]
     Base.metadata.drop_all(engine, [table], checkfirst=True)
 
-drop_table('messages')
-drop_table('chats')
 drop_table('users')
 
 
