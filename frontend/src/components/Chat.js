@@ -10,21 +10,56 @@ import { GrSend } from "react-icons/gr";
 import { UserContext } from "../context/user";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiHost } from "../utils/vars";
 
 export default function Chat() {
-  const { loggedIn, userData } = useContext(UserContext)
+  const { userData, setUserData } = useContext(UserContext)
   const [activeChatId, setActiveChatId] = useState(userData?.user?.chats?.[0]?.id)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(!loggedIn){
+    if(!userData){
       navigate('/home')
     }
-  }, [loggedIn])
+  }, [userData])
 
   function getMessages(){
     const activeChat = userData?.user?.chats?.find(chat => chat.id === activeChatId) || {messages: []}
     return activeChat.messages
+  }
+
+  function deleteChat(chatId){
+    fetch(`${apiHost}/chats/${chatId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${userData.accessToken}`
+      }
+    }).then(res => {
+      if(!res.ok) {
+        console.error(res.json())
+      }
+    })
+  }
+
+  function addChat(){
+    fetch(`${apiHost}/chats`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${userData.accessToken}`
+      }
+    }).then(res => {
+      if(res.ok){
+        res.json().then(data => {
+          setUserData(userData => {
+            const newUserData = userData
+            newUserData['user']['chats'].push(data.chat)
+            return newUserData
+          })
+        })
+      } else {
+        console.error(res.json())
+      }
+    })
   }
 
   return (
@@ -37,6 +72,7 @@ export default function Chat() {
               <div className="action-buttons">
                 <div className="new-chat flex flex-row justify-between items-center">
                   <button
+                    onClick={addChat}
                     type="button"
                     className="text-black bg-[#F9FAFA] font-medium rounded-md text-sm p-1 text-center inline-flex items-center  "
                   >
@@ -63,6 +99,7 @@ export default function Chat() {
                           </span>
                           <div className="inline-flex self-center items-center">
                             <button
+                              onClick={() => deleteChat(chat.id)}
                               className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
                               type="button"
                             >

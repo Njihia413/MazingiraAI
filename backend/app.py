@@ -229,7 +229,26 @@ def get_chat(id):
         return make_response(jsonify({'chat': chat.json()}), 200)
     return make_response(jsonify({'message': 'unauthorized'}), 401)
   except Exception as e:
-    return make_response(jsonify({'message': 'error creating chat'}), 500)
+    return make_response(jsonify({'message': 'error getting chat'}), 500)
+
+# delete chat
+@app.route('/api/chats/<int:id>', methods=['DELETE'])
+@jwt_required()
+def delete_chat(id):
+  data = request.get_json()
+  try:
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+      chat = [chat for chat in user.chats if chat.id == id]
+      if len(chat) == 1:
+        chat = chat[0]
+        db.session.delete(chat)
+        db.session.commit()
+        return make_response(jsonify({'chat': chat.json()}), 204)
+    return make_response(jsonify({'message': 'unauthorized'}), 401)
+  except Exception as e:
+    return make_response(jsonify({'message': 'error deleting chat'}), 500)
 
 # create messages
 @app.route('/api/messages', methods=['POST'])
