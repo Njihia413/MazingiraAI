@@ -4,3 +4,4 @@ Flask-JWT-Extended
 psycopg2-binary
 Flask-SQLAlchemy
 flask_cors
+pgpt_python
