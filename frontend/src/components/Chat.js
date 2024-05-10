@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { IoIosAdd } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { RiAttachment2 } from "react-icons/ri";
 import { HiOutlineEmojiSad } from "react-icons/hi";
@@ -11,11 +10,29 @@ import { UserContext } from "../context/user";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiHost } from "../utils/vars";
+import Chats from "./Chats";
 
 export default function Chat() {
-  const { userData, setUserData } = useContext(UserContext)
-  const [activeChatId, setActiveChatId] = useState(userData?.user?.chats?.[0]?.id)
+  const { userData } = useContext(UserContext)
+  const [chatDetails, setChatDetails] = useState({activeChatId: null, chats: []})
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if(!!userData){
+      const chats = userData?.user?.chats || []
+      setChatDetails({activeChatId: chats[0].id, chats: chats})
+    } else {
+      navigate('/home')
+    }
+  }, [])
+
+  function setActiveChatId(id){
+    setChatDetails(chatDetails => ({activeChatId: id, chats: chatDetails.chats})) 
+  }
+
+  function setChats(chats){
+    setChatDetails(chatDetails => ({activeChatId: chatDetails.activeChatId, chats: chats}))
+  }
 
   useEffect(() => {
     if(!userData){
@@ -23,25 +40,18 @@ export default function Chat() {
     }
   }, [userData])
 
+  function getChats(){
+    return userData?.user?.chats || []
+  }
+
   function getMessages(){
-    const activeChat = userData?.user?.chats?.find(chat => chat.id === activeChatId) || {messages: []}
+    const activeChat = userData?.user?.chats?.find(chat => chat.id === chatDetails.activeChatId) || {messages: []}
     return activeChat.messages
   }
 
-  function deleteChat(chatId){
-    fetch(`${apiHost}/chats/${chatId}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${userData.accessToken}`
-      }
-    }).then(res => {
-      if(!res.ok) {
-        console.error(res.json())
-      }
-    })
-  }
+  function addChat(e){
+    e.preventDefault()
 
-  function addChat(){
     fetch(`${apiHost}/chats`, {
       method: 'POST',
       headers: {
@@ -50,11 +60,7 @@ export default function Chat() {
     }).then(res => {
       if(res.ok){
         res.json().then(data => {
-          setUserData(userData => {
-            const newUserData = userData
-            newUserData['user']['chats'].push(data.chat)
-            return newUserData
-          })
+          setChats([...chatDetails.chats, data.chat])
         })
       } else {
         console.error(res.json())
@@ -89,27 +95,7 @@ export default function Chat() {
               </div>
               <div className="history h-full">
                 <div className="flex flex-col gap-2.5 my-8">
-                  {
-                    (userData?.user?.chats || []).map((chat, index) => {
-                      const firstMessage = chat.messages?.[0] || {question: `chat ${index + 1}`}
-                      return (
-                        <div key={firstMessage.question} className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3" onClick={()=>setActiveChatId(chat.id)}>
-                          <span className="text-[16px] font-baloo font-medium text-white ">
-                            { firstMessage.question }
-                          </span>
-                          <div className="inline-flex self-center items-center">
-                            <button
-                              onClick={() => deleteChat(chat.id)}
-                              className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
-                              type="button"
-                            >
-                              <MdDelete />
-                            </button>
-                          </div>
-                        </div>
-                      )
-                    })
-                  }
+                  <Chats setActiveChatId={setActiveChatId} chatDetails={chatDetails} setChats={setChats} />
                 </div>
               </div>
               <div className="account">
