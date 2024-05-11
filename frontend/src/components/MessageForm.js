@@ -14,6 +14,7 @@ export default function MessageForm({sendPrompt}){
     function handleSubmit(e){
         e.preventDefault()
         sendPrompt(prompt)
+        setPrompt('')
     }
 
     return (
