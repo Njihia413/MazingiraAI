@@ -3,14 +3,13 @@ import Navbar from "./Navbar";
 import { IoIosAdd } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
-import { RiAttachment2 } from "react-icons/ri";
-import { HiOutlineEmojiSad } from "react-icons/hi";
-import { GrSend } from "react-icons/gr";
 import { UserContext } from "../context/user";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiHost } from "../utils/vars";
 import Chats from "./Chats";
+import Messages from "./Messages";
+import MessageForm from "./MessageForm";
 
 export default function Chat() {
   const { userData } = useContext(UserContext)
@@ -20,11 +19,84 @@ export default function Chat() {
   useEffect(() => {
     if(!!userData){
       const chats = userData?.user?.chats || []
-      setChatDetails({activeChatId: chats[0].id, chats: chats})
+      setChatDetails({activeChatId: chats?.[0]?.id, chats: chats})
     } else {
       navigate('/home')
     }
   }, [])
+
+  function query(data) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('answer')
+      }, 3000)
+    })
+
+    // const response = await fetch(
+    //   "https://mv3ybdg2l5gtchrn.us-east-1.aws.endpoints.huggingface.cloud",
+    //   {
+    //     headers: { 
+    //       "Accept" : "application/json",
+    //       "Authorization": "Bearer hf_XXXXX",
+    //       "Content-Type": "application/json" 
+    //     },
+    //     method: "POST",
+    //     body: JSON.stringify(data),
+    //   }
+    // );
+    // const result = await response.json();
+    // return result;
+  }
+
+  async function sendPrompt(prompt){
+    const chatId = chatDetails.activeChatId
+
+    let chats = chatDetails.chats.map(chat => {
+      if(chatId === chat.id){
+        chat.messages.push({question: prompt, answer: null, persisted: false})
+        return chat
+      } else {
+        return chat
+      }
+    })   
+    
+    setChats(chats)
+
+    const response = await query()
+
+    fetch(`${apiHost}/messages`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        Authorization: `Bearer ${userData.accessToken}`
+      },
+      body: JSON.stringify({chat_id: chatId, question: prompt, answer: response})
+    }).then(res => {
+      if(res.ok){
+        res.json().then(data => {
+          chats = chatDetails.chats.map(chat => {
+            if(chat.id === chatDetails.activeChatId){
+              chat.messages = chat.messages.map(message => {
+                if(message?.persisted === false){
+                  return { question: message.question, answer: response }
+                } else {
+                  return message
+                }
+              })
+              return chat
+            } else {
+              return chat
+            }
+          })   
+          
+          setChats(chats)  
+        })
+      } else {
+        console.error(res.json())
+      }
+    })   
+  }
 
   function setActiveChatId(id){
     setChatDetails(chatDetails => ({activeChatId: id, chats: chatDetails.chats})) 
@@ -39,15 +111,6 @@ export default function Chat() {
       navigate('/home')
     }
   }, [userData])
-
-  function getChats(){
-    return userData?.user?.chats || []
-  }
-
-  function getMessages(){
-    const activeChat = userData?.user?.chats?.find(chat => chat.id === chatDetails.activeChatId) || {messages: []}
-    return activeChat.messages
-  }
 
   function addChat(e){
     e.preventDefault()
@@ -131,139 +194,10 @@ export default function Chat() {
               </div>
 
               <div className="actual-chat my-5 overflow-y-auto h-full hide-scrollbar">
-                <div className="flex flex-col gap-6 ">
-                  {
-                    getMessages().map(message => {
-                      return (
-                        <>
-                          <div className="flex items-start gap-2.5">
-                            <img
-                              className="w-8 h-8 rounded-full"
-                              src="https://ui-avatars.com/api/?name=James+Kanyiri"
-                              alt="James"
-                            ></img>
-                            <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-es-xl">
-                              <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
-                                { message.question }
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-start gap-2.5">
-                            <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">
-                              <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
-                                { message.answer }
-                              </p>
-                            </div>
-                            <img
-                              className="w-8 h-8 rounded-full"
-                              src="https://ui-avatars.com/api/?name=James+Kanyiri"
-                              alt="James"
-                            ></img>
-                          </div>
-                        </>
-                      )
-                    })
-                  }
-                  {/*<div className="flex items-start gap-2.5">*/}
-                  {/*  <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">*/}
-                  {/*    <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">*/}
-                  {/*      That's awesome. I think our users will really appreciate*/}
-                  {/*      the improvements.*/}
-                  {/*    </p>*/}
-                  {/*  </div>*/}
-                  {/*  <img*/}
-                  {/*    className="w-8 h-8 rounded-full"*/}
-                  {/*    src="https://ui-avatars.com/api/?name=James+Kanyiri"*/}
-                  {/*    alt="James"*/}
-                  {/*  ></img>*/}
-                  {/*</div>*/}
-                  {/*<div className="flex items-start gap-2.5">*/}
-                  {/*  <img*/}
-                  {/*    className="w-8 h-8 rounded-full"*/}
-                  {/*    src="https://ui-avatars.com/api/?name=James+Kanyiri"*/}
-                  {/*    alt="James"*/}
-                  {/*  ></img>*/}
-                  {/*  <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-es-xl">*/}
-                  {/*    <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">*/}
-                  {/*      That's awesome. I think our users will really appreciate*/}
-                  {/*      the improvements.*/}
-                  {/*    </p>*/}
-                  {/*  </div>*/}
-                  {/*</div>*/}
-                  {/*<div className="flex items-start gap-2.5">*/}
-                  {/*  <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">*/}
-                  {/*    <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">*/}
-                  {/*      That's awesome. I think our users will really appreciate*/}
-                  {/*      the improvements.*/}
-                  {/*    </p>*/}
-                  {/*  </div>*/}
-                  {/*  <img*/}
-                  {/*    className="w-8 h-8 rounded-full"*/}
-                  {/*    src="https://ui-avatars.com/api/?name=James+Kanyiri"*/}
-                  {/*    alt="James"*/}
-                  {/*  ></img>*/}
-                  {/*</div>*/}
-                  {/*<div className="flex items-start gap-2.5">*/}
-                  {/*  <img*/}
-                  {/*    className="w-8 h-8 rounded-full"*/}
-                  {/*    src="https://ui-avatars.com/api/?name=James+Kanyiri"*/}
-                  {/*    alt="James"*/}
-                  {/*  ></img>*/}
-                  {/*  <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-es-xl">*/}
-                  {/*    <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">*/}
-                  {/*      That's awesome. I think our users will really appreciate*/}
-                  {/*      the improvements.*/}
-                  {/*    </p>*/}
-                  {/*  </div>*/}
-                  {/*</div>*/}
-                  {/*<div className="flex items-start gap-2.5">*/}
-                  {/*  <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">*/}
-                  {/*    <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">*/}
-                  {/*      That's awesome. I think our users will really appreciate*/}
-                  {/*      the improvements.*/}
-                  {/*    </p>*/}
-                  {/*  </div>*/}
-                  {/*  <img*/}
-                  {/*    className="w-8 h-8 rounded-full"*/}
-                  {/*    src="https://ui-avatars.com/api/?name=James+Kanyiri"*/}
-                  {/*    alt="James"*/}
-                  {/*  ></img>*/}
-                  {/*</div>*/}
-                </div>
+                <Messages chatDetails={chatDetails}/>
               </div>
 
-              <div className="text-input mb-10">
-                <form>
-                  <div className="flex items-center px-3 py-2 rounded-xl bg-white border border-gray-300">
-                    <textarea
-                      id="chat"
-                      rows="1"
-                      className="font-baloo block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-none focus:ring-white focus:border-white "
-                      placeholder="Your message..."
-                    ></textarea>
-
-                    <button
-                      type="button"
-                      className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
-                    >
-                      <RiAttachment2 />
-                    </button>
-                    <button
-                      type="button"
-                      className="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 "
-                    >
-                      <HiOutlineEmojiSad />
-                    </button>
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
-                    >
-                      <GrSend />
-                      <span className="sr-only">Send message</span>
-                    </button>
-                  </div>
-                </form>
-              </div>
+              <MessageForm chatDetails={chatDetails} sendPrompt={sendPrompt}/>
             </div>
           </section>
         </div>

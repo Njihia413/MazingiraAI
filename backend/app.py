@@ -265,4 +265,22 @@ def create_message():
       return make_response(jsonify({'message': message.json()}), 200)
     return make_response(jsonify({'message': 'unauthorized'}), 401)
   except Exception as e:
-    return make_response(jsonify({'message': 'error creating chat'}), 500)
+    return make_response(jsonify({'message': 'error creating message'}), 500)
+
+# create messages
+@app.route('/api/messages/<int:id>', methods=['PUT'])
+@jwt_required()
+def update_message():
+  data = request.get_json()
+  try:
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    if user:
+      message = Message.query.filter_by(id=id).first()
+      message.answer = data['answer']
+      db.session.add(message)
+      db.session.commit()
+      return make_response(jsonify({'message': message.json()}), 200)
+    return make_response(jsonify({'message': 'unauthorized'}), 401)
+  except Exception as e:
+    return make_response(jsonify({'message': 'error updating message'}), 500)
