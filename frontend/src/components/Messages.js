@@ -12,7 +12,7 @@ export default function Messages({chatDetails}){
     }, [chatDetails])
 
     return (
-        <div className="flex flex-col gap-6 ">
+        <div className="flex flex-col gap-6 p-4">
         {
           messages.map(message => {
             return (
@@ -21,7 +21,7 @@ export default function Messages({chatDetails}){
                   <img
                     className="w-8 h-8 rounded-full"
                     src={`https://ui-avatars.com/api/?name=${userData?.user?.full_name}`}
-                    alt="James"
+                    alt={`${userData?.user?.full_name}`}
                   ></img>
                   <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-es-xl">
                     <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
@@ -37,11 +37,6 @@ export default function Messages({chatDetails}){
                                 { message.answer }
                                 </p>
                             </div>
-                            <img
-                                className="w-8 h-8 rounded-full"
-                                src="https://ui-avatars.com/api/?name=James+Kanyiri"
-                                alt="James"
-                            ></img>
                         </div>
                     : ''
                 }
