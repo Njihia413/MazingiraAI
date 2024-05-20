@@ -26,13 +26,7 @@ export default function Chat() {
   }, [])
 
   async function query(prompt) {
-    // return new Promise((resolve, reject) => {
-    //   setTimeout(() => {
-    //     resolve('answer')
-    //   }, 3000)
-    // })
-
-    prompt = prompt + " in Nairobi, Kenya"
+    prompt = prompt.replace(/\?/g, "") + "?"
 
     const response = await fetch(
       "https://mv3ybdg2l5gtchrn.us-east-1.aws.endpoints.huggingface.cloud",
