@@ -26,7 +26,7 @@ export default function Chats({setActiveChatId, chatDetails, setChats}){
             const firstMessage = chat.messages?.[0] || {question: `chat ${index + 1}`}
             return (
               <div key={firstMessage.question} className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3" onClick={()=>setActiveChatId(chat.id)}>
-                <span className="text-[16px] font-baloo font-medium text-white ">
+                <span className="text-[16px] font-baloo font-medium text-white" style={{whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden"}}>
                   { firstMessage.question }
                 </span>
                 <div className="inline-flex self-center items-center">
