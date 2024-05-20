@@ -25,27 +25,32 @@ export default function Chat() {
     }
   }, [])
 
-  function query(data) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('answer')
-      }, 3000)
-    })
+  async function query(prompt) {
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve('answer')
+    //   }, 3000)
+    // })
 
-    // const response = await fetch(
-    //   "https://mv3ybdg2l5gtchrn.us-east-1.aws.endpoints.huggingface.cloud",
-    //   {
-    //     headers: { 
-    //       "Accept" : "application/json",
-    //       "Authorization": "Bearer hf_XXXXX",
-    //       "Content-Type": "application/json" 
-    //     },
-    //     method: "POST",
-    //     body: JSON.stringify(data),
-    //   }
-    // );
-    // const result = await response.json();
-    // return result;
+    const response = await fetch(
+      "https://mv3ybdg2l5gtchrn.us-east-1.aws.endpoints.huggingface.cloud",
+      {
+        headers: { 
+          "Accept" : "application/json",
+          "Authorization": "Bearer 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",
+          "Content-Type": "application/json" 
+        },
+        method: "POST",
+        body: JSON.stringify({
+          inputs: prompt,
+          parameters: {}
+        }),
+      }
+    );
+
+    let result = await response.json();
+    result = (result || []).map(item => item.generated_text)[0]
+    return result.replace(/.*?[\.?!]/, '')
   }
 
   async function sendPrompt(prompt){
@@ -62,7 +67,8 @@ export default function Chat() {
     
     setChats(chats)
 
-    const response = await query()
+    const response = await query(prompt)
+    console.log("response: ", response)
 
     fetch(`${apiHost}/messages`, {
       method: 'POST',
