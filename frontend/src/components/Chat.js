@@ -172,7 +172,7 @@ export default function Chat() {
                   <a href="#" className="items-center block p-3 sm:flex">
                     <img
                       className="w-12 h-12 mb-3 me-3 rounded-full sm:mb-0"
-                      src="https://ui-avatars.com/api/?name=James+Kanyiri"
+                      src={`https://ui-avatars.com/api/?name=${userData?.user?.full_name}`}
                       alt="Jese Leos image"
                     />
                     <div className="flex flex-col">

@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/user";
 
 export default function Messages({chatDetails}){
+    const { userData } = useContext(UserContext)
     const [messages, setMessages] = useState([])
 
     useEffect(() => {
@@ -18,7 +20,7 @@ export default function Messages({chatDetails}){
                 <div className="flex items-start gap-2.5">
                   <img
                     className="w-8 h-8 rounded-full"
-                    src="https://ui-avatars.com/api/?name=James+Kanyiri"
+                    src={`https://ui-avatars.com/api/?name=${userData?.user?.full_name}`}
                     alt="James"
                   ></img>
                   <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-es-xl">
