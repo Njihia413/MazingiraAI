@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { IoIosAdd } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
@@ -7,8 +7,26 @@ import { CiSearch } from "react-icons/ci";
 import { RiAttachment2 } from "react-icons/ri";
 import { HiOutlineEmojiSad } from "react-icons/hi";
 import { GrSend } from "react-icons/gr";
+import { UserContext } from "../context/user";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Chat() {
+  const { loggedIn, userData } = useContext(UserContext)
+  const [activeChatId, setActiveChatId] = useState(userData?.user?.chats?.[0]?.id)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if(!loggedIn){
+      navigate('/home')
+    }
+  }, [loggedIn])
+
+  function getMessages(){
+    const activeChat = userData?.user?.chats?.find(chat => chat.id === activeChatId) || {messages: []}
+    return activeChat.messages
+  }
+
   return (
     <>
       <div className="chat h-screen">
@@ -35,110 +53,26 @@ export default function Chat() {
               </div>
               <div className="history h-full">
                 <div className="flex flex-col gap-2.5 my-8">
-                  <div className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3">
-                    <span className="text-[16px] font-baloo font-medium text-white ">
-                      How to solve climate
-                    </span>
-                    <div className="inline-flex self-center items-center">
-                      <button
-                        className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
-                        type="button"
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3">
-                    <span className="text-[16px] font-baloo font-medium text-white ">
-                      How to solve climate
-                    </span>
-                    <div className="inline-flex self-center items-center">
-                      <button
-                        className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
-                        type="button"
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3">
-                    <span className="text-[16px] font-baloo font-medium text-white ">
-                      How to solve climate
-                    </span>
-                    <div className="inline-flex self-center items-center">
-                      <button
-                        className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
-                        type="button"
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3">
-                    <span className="text-[16px] font-baloo font-medium text-white ">
-                      How to solve climate
-                    </span>
-                    <div className="inline-flex self-center items-center">
-                      <button
-                        className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
-                        type="button"
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3">
-                    <span className="text-[16px] font-baloo font-medium text-white ">
-                      How to solve climate
-                    </span>
-                    <div className="inline-flex self-center items-center">
-                      <button
-                        className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
-                        type="button"
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3">
-                    <span className="text-[16px] font-baloo font-medium text-white ">
-                      How to solve climate
-                    </span>
-                    <div className="inline-flex self-center items-center">
-                      <button
-                        className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
-                        type="button"
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3">
-                    <span className="text-[16px] font-baloo font-medium text-white ">
-                      How to solve climate
-                    </span>
-                    <div className="inline-flex self-center items-center">
-                      <button
-                        className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
-                        type="button"
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3">
-                    <span className="text-[16px] font-baloo font-medium text-white ">
-                      How to solve climate
-                    </span>
-                    <div className="inline-flex self-center items-center">
-                      <button
-                        className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
-                        type="button"
-                      >
-                        <MdDelete />
-                      </button>
-                    </div>
-                  </div>
+                  {
+                    (userData?.user?.chats || []).map((chat, index) => {
+                      const firstMessage = chat.messages?.[0] || {question: `chat ${index + 1}`}
+                      return (
+                        <div key={firstMessage.question} className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3" onClick={()=>setActiveChatId(chat.id)}>
+                          <span className="text-[16px] font-baloo font-medium text-white ">
+                            { firstMessage.question }
+                          </span>
+                          <div className="inline-flex self-center items-center">
+                            <button
+                              className="inline-flex self-center items-center  text-2xl font-medium text-center text-white  rounded-lg  "
+                              type="button"
+                            >
+                              <MdDelete />
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
                 </div>
               </div>
               <div className="account">
@@ -151,7 +85,7 @@ export default function Chat() {
                     />
                     <div className="flex flex-col">
                       <p className="text-[16px] font-baloo font-normal">Welcome back</p>
-                      <p className="text-[16px] font-baloo font-bold">James Kanyiri</p>
+                      <p className="text-[16px] font-baloo font-bold">{userData?.user?.full_name}</p>
                     </div>
                   </a>
                 </div>
@@ -175,71 +109,38 @@ export default function Chat() {
 
               <div className="actual-chat my-5 overflow-y-auto h-full hide-scrollbar">
                 <div className="flex flex-col gap-6 ">
-                  <div className="flex items-start gap-2.5">
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src="https://ui-avatars.com/api/?name=James+Kanyiri"
-                      alt="James"
-                    ></img>
-                    <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-es-xl">
-                      <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
-                        That's awesome. I think our users will really appreciate
-                        the improvements.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">
-                      <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
-                        That's awesome. I think our users will really appreciate
-                        the improvements.
-                      </p>
-                    </div>
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src="https://ui-avatars.com/api/?name=James+Kanyiri"
-                      alt="James"
-                    ></img>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src="https://ui-avatars.com/api/?name=James+Kanyiri"
-                      alt="James"
-                    ></img>
-                    <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-es-xl">
-                      <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
-                        That's awesome. I think our users will really appreciate
-                        the improvements.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">
-                      <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
-                        That's awesome. I think our users will really appreciate
-                        the improvements.
-                      </p>
-                    </div>
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src="https://ui-avatars.com/api/?name=James+Kanyiri"
-                      alt="James"
-                    ></img>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src="https://ui-avatars.com/api/?name=James+Kanyiri"
-                      alt="James"
-                    ></img>
-                    <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-es-xl">
-                      <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
-                        That's awesome. I think our users will really appreciate
-                        the improvements.
-                      </p>
-                    </div>
-                  </div>
+                  {
+                    getMessages().map(message => {
+                      return (
+                        <>
+                          <div className="flex items-start gap-2.5">
+                            <img
+                              className="w-8 h-8 rounded-full"
+                              src="https://ui-avatars.com/api/?name=James+Kanyiri"
+                              alt="James"
+                            ></img>
+                            <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-es-xl">
+                              <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
+                                { message.question }
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-2.5">
+                            <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">
+                              <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
+                                { message.answer }
+                              </p>
+                            </div>
+                            <img
+                              className="w-8 h-8 rounded-full"
+                              src="https://ui-avatars.com/api/?name=James+Kanyiri"
+                              alt="James"
+                            ></img>
+                          </div>
+                        </>
+                      )
+                    })
+                  }
                   {/*<div className="flex items-start gap-2.5">*/}
                   {/*  <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">*/}
                   {/*    <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">*/}

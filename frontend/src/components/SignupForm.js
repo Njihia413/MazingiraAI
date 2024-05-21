@@ -2,9 +2,14 @@ import React, { useReducer } from "react";
 import Line2 from "../assets/images/Line2.png";
 import { objectReducer } from "../utils/reducers";
 import { apiHost } from "../utils/vars";
+import { UserContext } from "../context/user";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
     const [state, dispatch] = useReducer(objectReducer, {full_name: '', email: '', password: '', confirm_password: ''})
+    const { setLoggedIn, setUserData } = useContext(UserContext)
+    const navigate = useNavigate()
 
     function handleSignup(e){
         e.preventDefault()
@@ -17,10 +22,17 @@ const SignupForm = () => {
                 },
                 body: JSON.stringify(state),
             }).then(res => {
-                console.log(res.json())
                 if(res.ok){
-                    console.log(res.json())
-                    // localStorage.setItem('accessToken', res.json())
+                    res.json().then(d => {
+                        const data = {
+                            user: d.user,
+                            accessToken: d.access_token
+                        }
+                        localStorage.setItem('data', btoa(JSON.stringify(data)))
+                        setUserData(data)
+                        setLoggedIn(true)
+                        navigate('/chat')
+                    })
                 }
             })
         } else {

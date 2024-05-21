@@ -12,3 +12,7 @@ HOW JWT TOKEN WORKS IN FLASK
 
 RELATIONSHIP PATTERNS IN SQL ALCHEMY
     https://docs.sqlalchemy.org/en/20/orm/basic_relationships.html
+
+DELETE TABLES
+    https://stackoverflow.com/questions/4763472/sqlalchemy-clear-database-content-but-dont-drop-the-schema
+    https://stackoverflow.com/questions/35918605/how-to-delete-a-table-in-sqlalchemy

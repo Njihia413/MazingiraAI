@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import Logo from "../assets/images/Logo.png";
+import { UserContext } from "../context/user";
+import { useContext } from "react";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const {loggedIn, setLoggedIn} = useContext(UserContext)
+    const navigate = useNavigate()
+
+    function logout(){
+        localStorage.clear()
+        setLoggedIn(false)
+    }
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -17,19 +26,24 @@ const Navbar = () => {
                     <p className="font-bold font-baloo py-4 text-[20px]">MazingiraAI</p>
                 </Link>
 
-                <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <button
-                        type="button"
-                        className="text-[#00BB1E] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px] md:block hidden"
-                    >
-                        <a href="/signup">Sign up</a>
-                    </button>
-                    <div
-                        className="font-baloo bg-brownBackground -pr-40 w-[111px] h-[49px] font-semibold rounded-md text-[#00BB1E] text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden"
-                    >
-                        <a href="/login">Log in</a>
-                    </div>
-                </div>
+                {
+                    !loggedIn ?
+                        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                            <button
+                                type="button"
+                                className="text-[#00BB1E] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px] md:block hidden"
+                            >
+                                <a onClick={()=>navigate('/signup')}>Sign up</a>
+                            </button>
+                            <div
+                                className="font-baloo bg-brownBackground -pr-40 w-[111px] h-[49px] font-semibold rounded-md text-[#00BB1E] text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden"
+                            >
+                                <a onClick={()=>navigate('/login')}>Log in</a>
+                            </div>
+                        </div>
+                    : ''
+                }
+                
                     <button
                         onClick={toggleMobileMenu}
                         type="button"
@@ -87,21 +101,24 @@ const Navbar = () => {
                                 Contact
                             </NavLink>
                         </li>
-                        <li className="block py-2 px-3 md:p-0 font-baloo font-normal text-[18px]">
-                            <NavLink
-                                to="/chat"
-                                className={({ isActive }) => (isActive ? "text-[#00BB1E]" : "")}
-                            >
-                                Chat
-                        ear    </NavLink>
-                        </li>
+                        {
+                            loggedIn ?
+                                <li className="block py-2 px-3 md:p-0 font-baloo font-normal text-[18px]">
+                                    <NavLink
+                                        to="/chat"
+                                        className={({ isActive }) => (isActive ? "text-[#00BB1E]" : "")}
+                                    >
+                                        Chat
+                                    </NavLink>
+                                </li>
+                            : ''
+                        }
                         <li className="md:hidden block">
                             {/*<div className="font-baloo font-normal text-black text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden">*/}
                             {/*    <a href="/login">Log in</a>*/}
                             {/*</div>*/}
                             <div className="flex flex-col">
                                 <button
-                            
                                     type="button"
                                     className="text-[#00BB1E] bg-brownBackground  w-[111px] h-[49px] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px] mb-4"
                                 >
@@ -115,6 +132,16 @@ const Navbar = () => {
                                 </button>
                             </div>
                         </li>
+
+                        {
+                            loggedIn ?
+                                <div
+                                    className="font-baloo bg-brownBackground -pr-40 w-[111px] h-[49px] font-semibold rounded-md text-[#00BB1E] text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden"
+                                    >
+                                    <a onClick={logout}>logout </a>
+                                </div>
+                            : ''
+                        }
                     </ul>
                 </div>
             </div>
