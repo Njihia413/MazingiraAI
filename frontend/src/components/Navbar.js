@@ -38,7 +38,19 @@ const Navbar = () => {
                         </div>
                     : ''
                 }
-                
+
+                {
+                    userData ?
+                        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                            <div
+                                className="font-baloo bg-brownBackground -pr-40 w-[111px] h-[49px] font-semibold rounded-md text-[#00BB1E] text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden"
+                                >
+                                <a onClick={()=>logout()}>Log out </a>
+                            </div>
+                        </div>
+                        : ''
+                }
+
                     <button
                         onClick={toggleMobileMenu}
                         type="button"
@@ -127,16 +139,6 @@ const Navbar = () => {
                                 </button>
                             </div>
                         </li>
-
-                        {
-                            userData ?
-                                <div
-                                    className="font-baloo bg-brownBackground -pr-40 w-[111px] h-[49px] font-semibold rounded-md text-[#00BB1E] text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden"
-                                    >
-                                    <a onClick={()=>logout()}>logout </a>
-                                </div>
-                            : ''
-                        }
                     </ul>
                 </div>
             </div>

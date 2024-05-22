@@ -4,14 +4,16 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Chat from "./Chat";
 import About from "./About";
+import Contact from "./Contact";
 
-function App() {  
+function App() {
   return (
     <div className="App">
         <Routes>
             <Route path="/home" element={<Home/>}/>
             <Route path="/chat" element={<Chat/>}/>
             <Route path="/about" element={<About/>}/>
+            <Route path="/contact" element={<Contact/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/*" element={<Home/>}/>
