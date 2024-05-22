@@ -7,14 +7,14 @@ import { UserContext } from "../context/user";
 import { useContext } from "react";
 
 const Login = () => {
-    const { loggedIn } = useContext(UserContext)
+    const { userData } = useContext(UserContext)
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(loggedIn){
+        if(!!userData){
             navigate('/chat')
         }
-    }, [loggedIn])
+    }, [userData])
     
     return (
         <section>

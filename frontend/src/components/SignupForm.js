@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
     const [state, dispatch] = useReducer(objectReducer, {full_name: '', email: '', password: '', confirm_password: ''})
-    const { setLoggedIn, setUserData } = useContext(UserContext)
+    const { setUserData } = useContext(UserContext)
     const navigate = useNavigate()
 
     function handleSignup(e){
@@ -30,7 +30,6 @@ const SignupForm = () => {
                         }
                         localStorage.setItem('data', btoa(JSON.stringify(data)))
                         setUserData(data)
-                        setLoggedIn(true)
                         navigate('/chat')
                     })
                 }

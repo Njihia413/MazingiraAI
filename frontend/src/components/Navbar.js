@@ -6,13 +6,8 @@ import { useContext } from "react";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const {loggedIn, setLoggedIn} = useContext(UserContext)
+    const { logout, userData } = useContext(UserContext)
     const navigate = useNavigate()
-
-    function logout(){
-        localStorage.clear()
-        setLoggedIn(false)
-    }
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -27,7 +22,7 @@ const Navbar = () => {
                 </Link>
 
                 {
-                    !loggedIn ?
+                    !userData ?
                         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                             <button
                                 type="button"
@@ -102,7 +97,7 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         {
-                            loggedIn ?
+                            userData ?
                                 <li className="block py-2 px-3 md:p-0 font-baloo font-normal text-[18px]">
                                     <NavLink
                                         to="/chat"
@@ -134,11 +129,11 @@ const Navbar = () => {
                         </li>
 
                         {
-                            loggedIn ?
+                            userData ?
                                 <div
                                     className="font-baloo bg-brownBackground -pr-40 w-[111px] h-[49px] font-semibold rounded-md text-[#00BB1E] text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden"
                                     >
-                                    <a onClick={logout}>logout </a>
+                                    <a onClick={()=>logout()}>logout </a>
                                 </div>
                             : ''
                         }
