@@ -7,6 +7,13 @@ from flask_cors import CORS
 import contextlib
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.ext.declarative import declarative_base
+from pgpt_python.client import PrivateGPTApi
+
+
+gpt_client = PrivateGPTApi(base_url="http://localhost:8002")
+
+with open("./files/example.pdf", "rb") as f:
+  ingested_file_doc_id = gpt_client.ingestion.ingest_file(file=f).data[0].doc_id
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}}) # This will enable CORS for all routes
@@ -94,6 +101,22 @@ db.create_all()
 #               'Access-Control-Allow-Headers': 'Content-Type'}
 #   if request.method.lower() == 'options':
 #     return jsonify(headers), 200
+
+
+#create a test route
+@app.route('/api/test_gpt_health', methods=['GET'])
+def test_gpt_health():
+  return make_response(jsonify({'message': gpt_client.health.health()}), 200)
+
+@app.route('/api/test_gpt_ingestion', methods=['GET'])
+def test_gpt_ingestion():
+  ingested_file_doc_id = None
+  with open("./files/example.pdf", "rb") as f:
+    ingested_file_doc_id = gpt_client.ingestion.ingest_file(file=f).data[0].doc_id
+
+  return make_response(jsonify({'message': "ingested file doc id: {}".format(ingested_file_doc_id)}), 200)
+
+  
 
 #create a test route
 @app.route('/api/test', methods=['GET'])
