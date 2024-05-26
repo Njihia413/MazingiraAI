@@ -63,8 +63,14 @@ export default function Chat() {
     
     setChats(chats)
 
-    const response = await query(prompt)
-    console.log("response: ", response)
+    let response = ''
+    try {
+      response = await query(prompt)
+    } catch (error){
+      response = {question: prompt, answer: 'Failed to load response. Please try again', persisted: false, error: true}
+      console.error(error)
+    }
+    
 
     fetch(`${apiHost}/messages`, {
       method: 'POST',

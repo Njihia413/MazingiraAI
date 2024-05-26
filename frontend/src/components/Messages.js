@@ -32,7 +32,15 @@ export default function Messages({chatDetails}){
                 {
                     message.answer !== null ?
                         <div className="flex items-start gap-2.5">
-                            <div className="flex flex-col w-full  leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">
+                            <div className="flex flex-col w-full leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">
+                                <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
+                                { message.answer }
+                                </p>
+                            </div>
+                        </div>
+                    : message?.error ?
+                        <div className="flex items-start gap-2.5">
+                            <div className="flex flex-col w-full leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl" style={{border: 'solid 0.1rem red', backgroudColor: 'red'}}>
                                 <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
                                 { message.answer }
                                 </p>
