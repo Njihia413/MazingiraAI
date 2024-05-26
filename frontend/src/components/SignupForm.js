@@ -79,7 +79,7 @@ const SignupForm = () => {
                 <label htmlFor="confirmPassword" className="block mb-2 text-[18px] font-baloo font-medium text-[#718096]">
                     Confirm Password
                 </label>
-                <input type="confirmPassword" id="confirmPassword"
+                <input type="password" id="confirmPassword"
                        className="bg-white border border-[#CBD5E0] font-baloo font-normal text-[#4A5568] text-[16px] rounded-[12px] w-full p-3"
                        placeholder="@#*%"
                        required
