@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import Line2 from "../assets/images/Line2.png";
-import { apiHost } from "../utils/vars";
+import { apiHost } from "../utils/apiHost";
 import { objectReducer } from "../utils/reducers";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";

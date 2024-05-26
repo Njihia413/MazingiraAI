@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/user";
-import { apiHost } from "../utils/vars";
+import { apiHost } from "../utils/apiHost";
 import { MdDelete } from "react-icons/md";
 
 export default function Chats({setActiveChatId, chatDetails, setChats}){
@@ -24,8 +24,9 @@ export default function Chats({setActiveChatId, chatDetails, setChats}){
     return (
         (chatDetails?.chats || []).map((chat, index) => {
             const firstMessage = chat.messages?.[0] || {question: `chat ${index + 1}`}
+            const componentKey = firstMessage.question.replace(/\W/g, '') + `_${index}`
             return (
-              <div key={firstMessage.question} className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3" onClick={()=>setActiveChatId(chat.id)}>
+              <div key={componentKey} className="flex flex-row justify-between items-center bg-[#00BB1E]/30  rounded-lg h-12 p-2 gap-3" onClick={()=>setActiveChatId(chat.id)}>
                 <span className="text-[16px] font-baloo font-medium text-white" style={{whiteSpace: "nowrap", textOverflow: "ellipsis", overflow: "hidden"}}>
                   { firstMessage.question }
                 </span>

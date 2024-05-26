@@ -73,13 +73,12 @@ bookTitles.forEach(title => {
     }
   }).then((response) => {
     if (response.status === 201) {
-      console.log(response.data)
       const file = { name: title, docId: response.data.docId }
       fs.appendFile('./docIds.js', "  " + JSON.stringify(file) + ",\n", (err) => {
         if (err) console.error(err?.message);
       })
     } else {
-      console.log('Error:', response.status);
+      console.error('Error:', response.status);
     }
   }).catch((error) => {
     console.error(error);

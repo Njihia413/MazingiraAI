@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { apiHost } from "../utils/vars";
+import { apiHost } from "../utils/apiHost";
 
 const UserContext = createContext();
 

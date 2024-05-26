@@ -30,22 +30,22 @@ export default function Messages({chatDetails}){
                   </div>
                 </div>
                 {
-                    message.answer !== null ?
-                        <div className="flex items-start gap-2.5">
-                            <div className="flex flex-col w-full leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">
-                                <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
-                                { message.answer }
-                                </p>
-                            </div>
+                    message.answer === 'Failed to load response. Please try again' ?
+                      <div className="flex items-start gap-2.5">
+                        <div className="flex flex-col w-full leading-1.5 p-4 border border-gray-300  bg-red-100 rounded-e-xl rounded-ss-xl" style={{border: 'solid 0.1rem red', backgroudColor: 'red'}}>
+                            <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500 italic">
+                            { message.answer }
+                            </p>
                         </div>
-                    : message?.error ?
-                        <div className="flex items-start gap-2.5">
-                            <div className="flex flex-col w-full leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl" style={{border: 'solid 0.1rem red', backgroudColor: 'red'}}>
-                                <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
-                                { message.answer }
-                                </p>
-                            </div>
+                      </div>
+                    : message.answer !== null ?
+                      <div className="flex items-start gap-2.5">
+                        <div className="flex flex-col w-full leading-1.5 p-4 border border-gray-300  bg-white rounded-e-xl rounded-ss-xl">
+                            <p className="text-[16px] font-baloo font-medium py-2.5 text-gray-500">
+                            { message.answer }
+                            </p>
                         </div>
+                      </div>
                     : ''
                 }
               </>

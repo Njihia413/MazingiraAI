@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import Line2 from "../assets/images/Line2.png";
 import { objectReducer } from "../utils/reducers";
-import { apiHost } from "../utils/vars";
+import { apiHost } from "../utils/apiHost";
 import { UserContext } from "../context/user";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";

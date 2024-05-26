@@ -6,13 +6,14 @@ import { CiSearch } from "react-icons/ci";
 import { UserContext } from "../context/user";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiHost } from "../utils/vars";
+import { apiHost } from "../utils/apiHost";
 import Chats from "./Chats";
 import Messages from "./Messages";
 import MessageForm from "./MessageForm";
 import query from "../utils/query";
 
 export default function Chat() {
+  const chatProvider = 'huggingface' // change this to "huggingface" to get results from the huggingface model
   const { userData } = useContext(UserContext)
   const [chatDetails, setChatDetails] = useState({activeChatId: null, chats: []})
   const navigate = useNavigate()
@@ -26,29 +27,7 @@ export default function Chat() {
     }
   }, [])
 
-  async function sendPrompt(prompt){
-    const chatId = chatDetails.activeChatId
-
-    let chats = chatDetails.chats.map(chat => {
-      if(chatId === chat.id){
-        chat.messages.push({question: prompt, answer: null, persisted: false})
-        return chat
-      } else {
-        return chat
-      }
-    })   
-    
-    setChats(chats)
-
-    let response = ''
-    try {
-      response = await query(prompt)
-    } catch (error){
-      response = {question: prompt, answer: 'Failed to load response. Please try again', persisted: false, error: true}
-      console.error(error)
-    }
-    
-
+  function persistMessage(prompt, response){
     fetch(`${apiHost}/messages`, {
       method: 'POST',
       headers: {
@@ -56,31 +35,59 @@ export default function Chat() {
         'Accept': 'application/json',
         Authorization: `Bearer ${userData.accessToken}`
       },
-      body: JSON.stringify({chat_id: chatId, question: prompt, answer: response})
+      body: JSON.stringify({
+        chat_id:  chatDetails.activeChatId,
+        question: prompt,
+        answer: response
+      })
     }).then(res => {
       if(res.ok){
         res.json().then(data => {
-          chats = chatDetails.chats.map(chat => {
-            if(chat.id === chatDetails.activeChatId){
-              chat.messages = chat.messages.map(message => {
-                if(message?.persisted === false){
-                  return { question: message.question, answer: response }
-                } else {
-                  return message
-                }
-              })
-              return chat
-            } else {
-              return chat
+          let chats = chatDetails.chats
+          for(let i = 0; i < chats.length; i++){
+            if(chats[i].id === chatDetails.activeChatId){
+              for(let j = 0; j < chats[i].messages.length; j++){
+                if(chats[i].messages[j].id === 'placeholder'){
+                  chats[i].messages[j] = data.message
+                }            
+              }
             }
-          })   
+          }
           
           setChats(chats)  
         })
       } else {
         console.error(res.json())
       }
-    })   
+    }) 
+  }
+
+  async function sendPrompt(prompt){
+    let activeChat
+    let chats = chatDetails.chats.map(chat => {
+      if(chatDetails.activeChatId === chat.id){
+        chat.messages.push({question: prompt, answer: null, id: 'placeholder'})
+        activeChat = JSON.parse(JSON.stringify(chat))
+      }
+      return chat
+    })
+    
+    setChats(chats)
+
+    let response = ''
+    try {
+      if(chatProvider === 'askyourpdf'){
+        const activeChat = chatDetails.chats.find(chat => chat.id === chatDetails.activeChatId)
+        response = await query({prompt: activeChat, use: chatProvider})
+      } else if (chatProvider === 'huggingface') {
+        response = await query({prompt: prompt, use: chatProvider})
+      }
+    } catch (error){
+      response = 'Failed to load response. Please try again'
+      console.error(error)
+    }
+    
+    persistMessage(prompt, response)
   }
 
   function setActiveChatId(id){
