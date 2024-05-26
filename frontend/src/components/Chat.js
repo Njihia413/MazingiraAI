@@ -10,6 +10,7 @@ import { apiHost } from "../utils/vars";
 import Chats from "./Chats";
 import Messages from "./Messages";
 import MessageForm from "./MessageForm";
+import query from "../utils/query";
 
 export default function Chat() {
   const { userData } = useContext(UserContext)
@@ -24,30 +25,6 @@ export default function Chat() {
       navigate('/home')
     }
   }, [])
-
-  async function query(prompt) {
-    prompt = prompt.replace(/\?/g, "") + "?"
-
-    const response = await fetch(
-      "https://mv3ybdg2l5gtchrn.us-east-1.aws.endpoints.huggingface.cloud",
-      {
-        headers: { 
-          "Accept" : "application/json",
-          "Authorization": "Bearer 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",
-          "Content-Type": "application/json" 
-        },
-        method: "POST",
-        body: JSON.stringify({
-          inputs: prompt,
-          parameters: {}
-        }),
-      }
-    );
-
-    let result = await response.json();
-    result = (result || []).map(item => item.generated_text)[0]
-    return result.replace(/.*?[\.?!]/, '')
-  }
 
   async function sendPrompt(prompt){
     const chatId = chatDetails.activeChatId
