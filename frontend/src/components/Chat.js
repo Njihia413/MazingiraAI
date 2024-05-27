@@ -13,7 +13,7 @@ import MessageForm from "./MessageForm";
 import query from "../utils/query";
 
 export default function Chat() {
-  const chatProvider = 'huggingface' // change this to "huggingface" to get results from the huggingface model
+  const chatProvider = 'askyourpdf' // Can be; "askyourpdf" or "huggingface" depending on where you want to get responses from
   const { userData } = useContext(UserContext)
   const [chatDetails, setChatDetails] = useState({activeChatId: null, chats: []})
   const navigate = useNavigate()
