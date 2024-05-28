@@ -14,6 +14,7 @@ module.exports = withMT( {
         'signupBackground': "url('../public/Signup.png')",
         'signinBackground': "url('../public/Signin.png')",
         'aboutBackground': "url('../public/About.png')",
+        'contactBackground': "url('../public/Contact.png')",
       }
     },
   },

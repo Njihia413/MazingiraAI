@@ -120,25 +120,40 @@ const Navbar = () => {
                                 </li>
                             : ''
                         }
-                        <li className="md:hidden block">
-                            {/*<div className="font-baloo font-normal text-black text-[18px] text-center px-4 py-2 cursor-pointer md:block hidden">*/}
-                            {/*    <a href="/login">Log in</a>*/}
-                            {/*</div>*/}
-                            <div className="flex flex-col">
-                                <button
-                                    type="button"
-                                    className="text-[#00BB1E] bg-brownBackground  w-[111px] h-[49px] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px] mb-4"
-                                >
-                                    <Link to="/login">Log in</Link>
-                                </button>
-                                <button
-                                    type="button"
-                                    className="text-[#00BB1E] bg-brownBackground  w-[111px] h-[49px] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px]"
-                                >
-                                    <Link to="/signup">Sign up</Link>
-                                </button>
-                            </div>
-                        </li>
+                        {
+                            !userData ?
+                                <li className="md:hidden block">
+                                    <div className="flex flex-col">
+                                        <button
+                                            type="button"
+                                            className="text-[#00BB1E] bg-brownBackground  w-[111px] h-[49px] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px] mb-4"
+                                        >
+                                            <Link to="/login">Log in</Link>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="text-[#00BB1E] bg-brownBackground  w-[111px] h-[49px] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px]"
+                                        >
+                                            <Link to="/signup">Sign up</Link>
+                                        </button>
+                                    </div>
+                                </li>
+                            : ''
+                        }
+                        {
+                            userData ?
+                                <li className="md:hidden block">
+                                    <div className="flex flex-col">
+                                        <button
+                                            type="button"
+                                            className="text-[#00BB1E] bg-brownBackground  w-[111px] h-[49px] rounded-[10px] font-baloo font-semibold px-4 py-2 text-center cursor-pointer text-[18px] mb-4"
+                                        >
+                                            <a onClick={() => logout()}>Log out </a>
+                                        </button>
+                                    </div>
+                                </li>
+                            : ''
+                        }
                     </ul>
                 </div>
             </div>
