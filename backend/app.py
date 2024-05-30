@@ -1,19 +1,13 @@
 from flask import Flask, request, jsonify, make_response, session, redirect, url_for
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, get_jwt
-from flask_bcrypt import Bcrypt 
+from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from os import environ
 from flask_cors import CORS
 import contextlib
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from pgpt_python.client import PrivateGPTApi
 
-
-gpt_client = PrivateGPTApi(base_url="http://localhost:8002")
-
-with open("./files/example.pdf", "rb") as f:
-  ingested_file_doc_id = gpt_client.ingestion.ingest_file(file=f).data[0].doc_id
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}}) # This will enable CORS for all routes
@@ -31,7 +25,7 @@ db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
 # bcrypt initialization
-bcrypt = Bcrypt(app) 
+bcrypt = Bcrypt(app)
 
 # delete tables
 engine = create_engine(environ.get('DB_URL'))
@@ -51,7 +45,7 @@ drop_table('users')
 
 class User(db.Model):
   __tablename__ = 'users'
-  
+
   id = db.Column(db.Integer, primary_key=True)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.Text(), unique=True, nullable=False)
@@ -116,7 +110,7 @@ def test_gpt_ingestion():
 
   return make_response(jsonify({'message': "ingested file doc id: {}".format(ingested_file_doc_id)}), 200)
 
-  
+
 
 #create a test route
 @app.route('/api/test', methods=['GET'])
