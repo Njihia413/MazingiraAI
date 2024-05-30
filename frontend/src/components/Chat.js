@@ -110,8 +110,10 @@ export default function Chat() {
     fetch(`${apiHost}/chats`, {
       method: 'POST',
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${userData.accessToken}`
-      }
+      },
+      body: JSON.stringify({})
     }).then(res => {
       if(res.ok){
         res.json().then(data => {

@@ -1,13 +1,12 @@
 from flask import Flask, request, jsonify, make_response, session, redirect, url_for
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, get_jwt
-from flask_bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt 
 from flask_sqlalchemy import SQLAlchemy
 from os import environ
 from flask_cors import CORS
 import contextlib
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.ext.declarative import declarative_base
-
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}}) # This will enable CORS for all routes
@@ -25,7 +24,7 @@ db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
 # bcrypt initialization
-bcrypt = Bcrypt(app)
+bcrypt = Bcrypt(app) 
 
 # delete tables
 engine = create_engine(environ.get('DB_URL'))
@@ -45,7 +44,7 @@ drop_table('users')
 
 class User(db.Model):
   __tablename__ = 'users'
-
+  
   id = db.Column(db.Integer, primary_key=True)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.Text(), unique=True, nullable=False)
@@ -86,8 +85,6 @@ class Message(db.Model):
   def __repr__(self):
     return f'<Message "{self.question[:20]}...">'
 
-db.create_all()
-
 # @app.before_request
 # def before_request():
 #   headers = {'Access-Control-Allow-Origin': '*',
@@ -95,22 +92,7 @@ db.create_all()
 #               'Access-Control-Allow-Headers': 'Content-Type'}
 #   if request.method.lower() == 'options':
 #     return jsonify(headers), 200
-
-
-#create a test route
-@app.route('/api/test_gpt_health', methods=['GET'])
-def test_gpt_health():
-  return make_response(jsonify({'message': gpt_client.health.health()}), 200)
-
-@app.route('/api/test_gpt_ingestion', methods=['GET'])
-def test_gpt_ingestion():
-  ingested_file_doc_id = None
-  with open("./files/example.pdf", "rb") as f:
-    ingested_file_doc_id = gpt_client.ingestion.ingest_file(file=f).data[0].doc_id
-
-  return make_response(jsonify({'message': "ingested file doc id: {}".format(ingested_file_doc_id)}), 200)
-
-
+  
 
 #create a test route
 @app.route('/api/test', methods=['GET'])
@@ -301,3 +283,7 @@ def update_message():
     return make_response(jsonify({'message': 'unauthorized'}), 401)
   except Exception as e:
     return make_response(jsonify({'message': 'error updating message'}), 500)
+
+with app.app_context():
+  db.create_all()
+  app.run(debug=True)
