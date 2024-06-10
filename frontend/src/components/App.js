@@ -6,6 +6,7 @@ import Chat from "./Chat";
 import About from "./About";
 import Contact from "./Contact";
 import FourOFour from "./FourOFour";
+import Blogs from "./Blogs";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
+            <Route path="/blogs" element={<Blogs/>}/>
             <Route path="*" element={<FourOFour/>}/>
         </Routes>
     </div>

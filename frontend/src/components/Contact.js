@@ -5,6 +5,7 @@ import ContactLetter from "../assets/images/ContactLetter.png";
 import * as emailjs from "@emailjs/browser";
 import { ToastContainer, toast, Slide  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "./Footer";
 
 
 const Contact = () => {
@@ -218,6 +219,7 @@ const Contact = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
             <ToastContainer
                 position="top-right"
                 autoClose={3000}

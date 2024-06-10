@@ -7,6 +7,7 @@ import Person from "../assets/images/Person.png";
 import Path from "../assets/images/Path.png";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import {Link} from "react-router-dom";
 
 const Home = () => {
     return (
@@ -122,130 +123,130 @@ const Home = () => {
                     </div>
 
                     <div className="mt-[5rem] md:mt-[10rem]">
-                    <div>
-                            <div className="flex">
-                                <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">01</p>
+                        <Link to="/blogs" className="block">
+                            <div className="cursor-pointer">
+                                <div className="flex">
+                                    <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">01</p>
 
-                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
-                                    Understanding Climate Change: A Comprehensive Overview
+                                    <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                        Kenya's Climate Resilience Revolution: Private Finance Coupled With Civic Action Driving Sustainable Solutions Climate Impact
+                                    </p>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                         className="lucide lucide-arrow-right mt-4">
+                                        <path d="M5 12h14"/>
+                                        <path d="m12 5 7 7-7 7"/>
+                                    </svg>
+                                </div>
+
+                                <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                                    The Crisis Unveiled: Impact of Heavy Rains and Flooding
                                 </p>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                     strokeLinejoin="round"
-                                     className="lucide lucide-arrow-right mt-4">
-                                    <path d="M5 12h14"/>
-                                    <path d="m12 5 7 7-7 7"/>
-                                </svg>
+                                <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
                             </div>
+                        </Link>
 
-                            <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Exploring the Causes, Impacts, and Solutions
-                            </p>
+                        <Link to="/blogs" className="block">
+                            <div className="mt-[1.5rem] md:mt-[3rem] cursor-pointer">
+                                <div className="flex">
+                                    <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">02</p>
 
-                            <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
-                        </div>
+                                    <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                        Kenya Climate Ventures’: Transformative Initiatives In Refugee Communities
+                                    </p>
 
-                        <div className="mt-[1.5rem] md:mt-[3rem]">
-                            <div className="flex">
-                                <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">02</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                         className="lucide lucide-arrow-right mt-4">
+                                        <path d="M5 12h14"/>
+                                        <path d="m12 5 7 7-7 7"/>
+                                    </svg>
+                                </div>
 
-                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
-                                    The Role of Renewable Energy in Combatting Climate Change
+                                <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                                    Bolstering Refugees Through Innovative Investments
                                 </p>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                     strokeLinejoin="round"
-                                     className="lucide lucide-arrow-right mt-4">
-                                    <path d="M5 12h14"/>
-                                    <path d="m12 5 7 7-7 7"/>
-                                </svg>
+                                <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
                             </div>
+                        </Link>
 
-                            <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Harnessing Nature's Power for a Sustainable Future
-                            </p>
+                        <Link to="/blogs" className="block">
+                            <div className="mt-[1.5rem] md:mt-[3rem] cursor-pointer">
+                                <div className="flex">
+                                    <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">03</p>
 
-                            <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
-                        </div>
+                                    <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                        Cultivating Resilience: Kenya’s Climate-Smart Agriculture Revolution
+                                    </p>
 
-                        <div className="mt-[1.5rem] md:mt-[3rem]">
-                            <div className="flex">
-                                <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">03</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                         className="lucide lucide-arrow-right mt-4">
+                                        <path d="M5 12h14"/>
+                                        <path d="m12 5 7 7-7 7"/>
+                                    </svg>
+                                </div>
 
-                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
-                                    Adapting Agriculture to a Changing Climate
+                                <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                                    Seeds of Change: Unveiling Climate-Smart Initiatives in Nyandarua and Machakos Counties
                                 </p>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                     strokeLinejoin="round"
-                                     className="lucide lucide-arrow-right mt-4">
-                                    <path d="M5 12h14"/>
-                                    <path d="m12 5 7 7-7 7"/>
-                                </svg>
+                                <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
                             </div>
+                        </Link>
 
-                            <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Innovative Strategies for Resilient Food Systems
-                            </p>
+                        <Link to="/blogs" className="block">
+                            <div className="mt-[1.5rem] md:mt-[3rem] cursor-pointer">
+                                <div className="flex">
+                                    <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">04</p>
 
-                            <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
-                        </div>
+                                    <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                        Harmonizing Life And Peace: Kenya Climate Ventures’ Vision For World Water Day 2024
+                                    </p>
 
-                        <div className="mt-[1.5rem] md:mt-[3rem]">
-                            <div className="flex">
-                                <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">04</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                         className="lucide lucide-arrow-right mt-4">
+                                        <path d="M5 12h14"/>
+                                        <path d="m12 5 7 7-7 7"/>
+                                    </svg>
+                                </div>
 
-                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
-                                    Protecting Biodiversity in the Face of Climate Crisis
+                                <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                                    Nurturing Sustainable Solutions and Resilient Communities through Water Innovation and Stewardship
                                 </p>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                     strokeLinejoin="round"
-                                     className="lucide lucide-arrow-right mt-4">
-                                    <path d="M5 12h14"/>
-                                    <path d="m12 5 7 7-7 7"/>
-                                </svg>
+                                <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
                             </div>
+                        </Link>
 
-                            <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Preserving Ecosystems for a Thriving Planet
-                            </p>
+                        <Link to="/blogs" className="block">
+                            <div className="mt-[1.5rem] md:mt-[3rem] cursor-pointer">
+                                <div className="flex">
+                                    <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">05</p>
 
-                            <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
-                        </div>
+                                    <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
+                                        Pioneering Evidence Driven Eco-Friendly Practices For Sustainable Macadamia Farming In Kenya
+                                    </p>
 
-                        <div className="mt-[1.5rem] md:mt-[3rem]">
-                            <div className="flex">
-                                <p className="font-baloo font-semibold text-[25px] text-[#6f6f6f] mt-3">05</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                         className="lucide lucide-arrow-right mt-4">
+                                        <path d="M5 12h14"/>
+                                        <path d="m12 5 7 7-7 7"/>
+                                    </svg>
+                                </div>
 
-                                <p className="font-baloo font-normal text-[30px] md:text-[40px] text-black px-10">
-                                    Community-Led Climate Action: Inspiring Stories from Around the Globe
+                                <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
+                                    Empowering Lives Through Macadamia Farming: A Bedrock for Prosperity
                                 </p>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                     strokeLinejoin="round"
-                                     className="lucide lucide-arrow-right mt-4">
-                                    <path d="M5 12h14"/>
-                                    <path d="m12 5 7 7-7 7"/>
-                                </svg>
+                                <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
                             </div>
-
-                            <p className="px-16 font-baloo font-normal text-[15px] text-[#6f6f6f] mt-4">
-                                Local Solutions, Global Impact
-                            </p>
-
-                            <img className="mt-[1.5rem] md:mt-[3rem]" src={Path} alt="Path"/>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>
