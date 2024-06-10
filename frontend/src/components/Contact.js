@@ -1,18 +1,62 @@
-import React from "react";
+import React, {useRef, useState} from "react";
 import Navbar from "./Navbar";
 import Rectangle from "../assets/images/ContactRectangle.png";
-import {
-    Card,
-    CardHeader,
-    Typography,
-    CardBody,
-} from "@material-tailwind/react";
-import ContactFrame from "../assets/images/ContactFrame.png";
-import ContactGroup from "../assets/images/ContactGroup.png";
 import ContactLetter from "../assets/images/ContactLetter.png";
+import * as emailjs from "@emailjs/browser";
+import { ToastContainer, toast, Slide  } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Contact = () => {
+    const defaultFormState = {
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+    }
+
+    const form = useRef();
+    const [formState, setFormState] = useState(defaultFormState);
+
+    const handleFormChange = (e) => {
+        setFormState({ ...formState, [e.target.name]: e.target.value })
+    }
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        if (formState.name === '' || formState.email === '' || formState.subject === '' || formState.message === '') {
+            showToast("Error! Please fill in all the fields", "error");
+            return; // Exit the function if validation fails
+        }
+
+        console.log(formState);
+        setFormState(defaultFormState);
+
+        emailjs.sendForm('service_rbxyqwc', 'template_iuw9n7n', form.current, 'fRkhWeWQNIjvssorP')
+            .then((result) => {
+                console.log(result.text);
+                showToast("Success! Message sent. MazingiraAI team will get back to you as soon as possible. Thank you. 😃", "success");
+            }, (error) => {
+                console.log(error.text);
+                showToast("Error! Something went wrong. Please try again.", "error");
+            });
+    };
+
+
+    const showToast = (message, type) => {
+        switch (type) {
+            case 'success':
+                toast.success(message);
+                break;
+            case 'error':
+                toast.error(message);
+                break;
+            default:
+                toast(message);
+        }
+    };
+
     return (
         <>
             <Navbar/>
@@ -105,32 +149,65 @@ const Contact = () => {
                                                 </svg>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
 
                                 <div className="col-span-2 p-5 mt-[2rem]">
-                                    <form>
-                                        <div className=" h-11 w-full mt-2">
-                                            <input placeholder="Enter your Name *"
-                                                   className="peer h-full w-full border-b border-[#707070] bg-transparent pt-4 pb-1.5 font-baloo text-sm font-normal text-black outline outline-0 transition-all placeholder-shown:border-[#707070] focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
+                                    <form ref={form} onSubmit={handleFormSubmit}>
+                                        <div className="grid md:grid-cols-2 gap-4">
+                                            <div>
+                                                <div className=" h-11 w-full md:mt-2 mt-[1rem]">
+                                                    <input
+                                                        name="name"
+                                                        autoComplete='off'
+                                                        value={formState.name}
+                                                        placeholder="Enter your Name *"
+                                                        onChange={(e) => handleFormChange(e)}
+                                                        className="peer h-full w-full border-b border-[#707070] bg-transparent pt-4 pb-1.5 font-baloo text-sm font-normal text-black outline outline-0 transition-all placeholder-shown:border-[#707070] focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className=" h-11 w-full md:mt-2 mt-[2rem]">
+                                                    <input
+                                                        name="email"
+                                                        autoComplete='off'
+                                                        value={formState.email}
+                                                        placeholder="Enter your Email *"
+                                                        onChange={(e) => handleFormChange(e)}
+                                                        className="peer h-full w-full border-b border-[#707070] bg-transparent pt-4 pb-1.5 font-baloo text-sm font-normal text-black outline outline-0 transition-all placeholder-shown:border-[#707070] focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <div className=" h-11 w-full mt-[5rem]">
-                                            <input placeholder="Enter your Email *"
-                                                   className="peer h-full w-full border-b border-[#707070] bg-transparent pt-4 pb-1.5 font-baloo text-sm font-normal text-black outline outline-0 transition-all placeholder-shown:border-[#707070] focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
-                                        </div>
+                                        <div className="grid md:grid-cols-1 gap-4 md:mt-0 mt-[1rem]">
+                                            <div className=" h-11 w-full md:mt-[4rem] mt-[2rem]">
+                                                <input
+                                                    name='subject'
+                                                    autoComplete='off'
+                                                    value={formState.subject}
+                                                    placeholder="Enter the Subject *"
+                                                    onChange={(e) => handleFormChange(e)}
+                                                    className="peer h-full w-full border-b border-[#707070] bg-transparent pt-4 pb-1.5 font-baloo text-sm font-normal text-black outline outline-0 transition-all placeholder-shown:border-[#707070] focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
+                                            </div>
 
-                                        <div className=" h-11 w-full mt-[5rem]">
-                                            <input placeholder="Enter your Message *"
-                                                   className="peer h-full w-full border-b border-[#707070] bg-transparent pt-4 pb-1.5 font-baloo text-sm font-normal text-black outline outline-0 transition-all placeholder-shown:border-[#707070] focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
-                                        </div>
+                                            <div className=" h-11 w-full md:mt-[4rem] mt-[2rem]">
+                                                <input
+                                                    name='message'
+                                                    autoComplete='off'
+                                                    value={formState.message}
+                                                    placeholder="Enter your Message *"
+                                                    onChange={(e) => handleFormChange(e)}
+                                                    className="peer h-full w-full border-b border-[#707070] bg-transparent pt-4 pb-1.5 font-baloo text-sm font-normal text-black outline outline-0 transition-all placeholder-shown:border-[#707070] focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
+                                            </div>
 
-                                        <div className="flex justify-end">
-                                            <button
-                                                className="mt-[3rem] w-[165px] h-[49px] all-[unset] bg-[#00BB1E] rounded-md box-border font-baloo font-normal text-white text-[18px] tracking-[0] leading-[28.5px]">
-                                                Send Message
-                                            </button>
+                                            <div className="flex justify-end">
+                                                <button
+                                                    type="submit"
+                                                    className="mt-[3rem] w-[165px] h-[49px] all-[unset] bg-[#00BB1E] rounded-md box-border font-baloo font-normal text-white text-[18px] tracking-[0] leading-[28.5px]">
+                                                    Send Message
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
 
@@ -141,6 +218,19 @@ const Contact = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+                transition={Slide}
+            />
         </>
     )
 }
