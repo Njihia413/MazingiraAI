@@ -4,6 +4,7 @@ import L from 'leaflet'
 import locations from "../utils/locations";
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import Navbar from "./Navbar";
 
 
 function Map(){
@@ -36,7 +37,10 @@ function Map(){
     }, [])
 
     return (
-        <div id="map" style={{height: '100vh'}}></div>
+        <div className="chat h-screen">
+            <Navbar />
+            <div id="map" style={{height: '100vh'}}></div>
+        </div>
     )
 }
 

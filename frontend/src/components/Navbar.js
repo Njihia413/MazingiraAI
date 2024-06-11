@@ -108,6 +108,14 @@ const Navbar = () => {
                                 Contact
                             </NavLink>
                         </li>
+                        <li className="block py-2 px-3 md:p-0 font-baloo font-normal text-[18px]">
+                            <NavLink
+                                to="/map"
+                                className={({ isActive }) => (isActive ? "text-[#00BB1E]" : "")}
+                            >
+                                Map
+                            </NavLink>
+                        </li>
                         {
                             userData ?
                                 <li className="block py-2 px-3 md:p-0 font-baloo font-normal text-[18px]">
