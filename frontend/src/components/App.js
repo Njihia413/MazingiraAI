@@ -7,6 +7,7 @@ import About from "./About";
 import Contact from "./Contact";
 import FourOFour from "./FourOFour";
 import Blogs from "./Blogs";
+import Map from "./Map";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/chat" element={<Chat/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/contact" element={<Contact/>}/>
+            <Route path="/map" element={<Map />}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/blogs" element={<Blogs/>}/>
