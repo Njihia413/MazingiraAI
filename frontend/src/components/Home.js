@@ -31,9 +31,29 @@ const Home = () => {
                         </p>
 
 
-                        <img className="md:h-[502px] w-[502px] sm:h-[400px] md:[1.5rem] md:mt-[3rem] hidden sm:block"
+                        <div
+                            className="relative inset-x-0 mt-[1rem] top-1 transform -translate-y-1 mx-auto bg-white p-6 rounded-lg shadow-lg flex items-center space-x-4 min-w-lg">
+                            <div>
+                                <h3 className="text-sm font-baloo font-semibold text-gray-400">GET STARTED</h3>
+                                <p className="text-lg font-baloo font-bold text-black">Get started today with MazingiraAI!</p>
+                            </div>
+                            <Link
+                                to="/"
+                                className="w-[155px] h-[45px] all-[unset] bg-[#CDA274] rounded-md box-border font-baloo font-normal text-white text-[18px] tracking-[0] leading-[28.5px] flex items-center justify-center"
+                            >
+                                Get Started
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024"
+                                     className="ml-2">
+                                    <path fill="#ffffff"
+                                          d="M754.752 480H160a32 32 0 1 0 0 64h594.752L521.344 777.344a32 32 0 0 0 45.312 45.312l288-288a32 32 0 0 0 0-45.312l-288-288a32 32 0 1 0-45.312 45.312z"/>
+                                </svg>
+                            </Link>
+                        </div>
+
+                        <img className="md:h-[502px] w-[502px] sm:h-[400px] md:[1.5rem] md:mt-[-1rem] hidden sm:block"
                              alt="HomeImg2"
-                             src={HomeImg2}/>
+                             src={HomeImg2}
+                        />
                     </div>
 
                     <div className="mt-[2.5rem] md:mt-[5rem]">
