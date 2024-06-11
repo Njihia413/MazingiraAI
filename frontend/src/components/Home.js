@@ -14,7 +14,7 @@ const Home = () => {
         <>
             <Navbar/>
             <div className="container mx-auto bg-white md:p-0 p-6">
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="md:mt-[5rem]">
                         <p className="font-baloo font-semibold text-black text-[30px] md:text-[60px]">
                             Let’s Connect <br/>
@@ -32,27 +32,31 @@ const Home = () => {
 
 
                         <div
-                            className="relative inset-x-0 mt-[1rem] top-1 transform -translate-y-1 mx-auto bg-white p-6 rounded-lg shadow-lg flex items-center space-x-4 min-w-lg">
-                            <div>
-                                <h3 className="text-sm font-baloo font-semibold text-gray-400">GET STARTED</h3>
-                                <p className="text-lg font-baloo font-bold text-black">Get started today with MazingiraAI!</p>
+                            className="hidden lg:flex relative inset-x-0 mt-[1rem] top-1 transform -translate-y-1 mx-auto bg-white p-6 rounded-lg shadow-lg items-center space-x-4 min-w-lg">
+                            <div className="flex items-center justify-between gap-x-20">
+                                <div>
+                                    <h3 className="text-sm font-baloo font-semibold text-gray-400">GET STARTED</h3>
+                                    <p className="text-lg font-baloo font-bold text-black">Get started today with
+                                        MazingiraAI!</p>
+                                </div>
+                                <Link
+                                    to="/signup"
+                                    className="inline-flex items-center w-[155px] h-[45px] all-[unset] bg-[#00BB1E] rounded-md box-border font-baloo font-normal text-white text-[18px] tracking-[0] leading-[28.5px] justify-center"
+                                >
+                                    Get Started
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                         viewBox="0 0 1024 1024" className="ml-2">
+                                        <path fill="#ffffff"
+                                              d="M754.752 480H160a32 32 0 1 0 0 64h594.752L521.344 777.344a32 32 0 0 0 45.312 45.312l288-288a32 32 0 0 0 0-45.312l-288-288a32 32 0 1 0-45.312 45.312z"/>
+                                    </svg>
+                                </Link>
                             </div>
-                            <Link
-                                to="/"
-                                className="w-[155px] h-[45px] all-[unset] bg-[#CDA274] rounded-md box-border font-baloo font-normal text-white text-[18px] tracking-[0] leading-[28.5px] flex items-center justify-center"
-                            >
-                                Get Started
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 1024 1024"
-                                     className="ml-2">
-                                    <path fill="#ffffff"
-                                          d="M754.752 480H160a32 32 0 1 0 0 64h594.752L521.344 777.344a32 32 0 0 0 45.312 45.312l288-288a32 32 0 0 0 0-45.312l-288-288a32 32 0 1 0-45.312 45.312z"/>
-                                </svg>
-                            </Link>
                         </div>
 
-                        <img className="md:h-[502px] w-[502px] sm:h-[400px] md:[1.5rem] md:mt-[-1rem] hidden sm:block"
-                             alt="HomeImg2"
-                             src={HomeImg2}
+                        <img
+                            className="hidden lg:block md:h-[502px] w-[502px] sm:h-[400px] md:[1.5rem] md:mt-[-1rem]"
+                            alt="HomeImg2"
+                            src={HomeImg2}
                         />
                     </div>
 
@@ -61,30 +65,30 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
                     <div className="mt-[5rem] md:mt-[10rem]">
                         <p className="font-baloo font-semibold text-black text-[25px] md:text-[50px]">
                             Chat with MazingiraAI&nbsp;
-                            <span className="hidden md:inline">
+                            <span className="hidden lg:inline">
                                 <br/>
                             </span>
                             anytime, anywhere on&nbsp;
-                            <span className="hidden md:inline">
+                            <span className="hidden lg:inline">
                                 <br/>
                             </span>
                             matters with Climate
                         </p>
 
 
-                        <img className="mt-[1.5rem] md:mt-[3rem]" src={Line} alt="Line"/>
+                        <img className="mt-[1.5rem] md:mt-[1rem] lg:mt-[3rem]" src={Line} alt="Line"/>
 
-                        <p className="mt-[1.5rem] md:mt-[3rem] font-baloo font-regular text-[18px] text-[#404852]">
+                        <p className="mt-[1.5rem] md:mt-[2rem] lg:mt-[3rem] font-baloo font-regular text-[18px] text-[#404852]">
                             Catalyze change with MazingiraAI, your dynamic hub for real-time&nbsp;
-                            <span className="hidden md:inline">
+                            <span className="hidden lg:inline">
                                 <br/>
                             </span>
                             climate knowledge and impactful actions, guiding us towards a resilient,&nbsp;
-                            <span className="hidden md:inline">
+                            <span className="hidden lg:inline">
                                 <br/>
                             </span>
                             sustainable tomorrow.
@@ -109,15 +113,15 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
                     <div className="mt-[5rem] md:mt-[10rem]">
                         <p className="font-baloo font-semibold text-[30px] md:text-[60px] text-black">
                             Browse our&nbsp;
-                            <span className="hidden md:inline">
+                            <span className="hidden lg:inline">
                                 <br/>
                             </span>
                             articles on Climate&nbsp;
-                            <span className="hidden md:inline">
+                            <span className="hidden lg:inline">
                                 <br/>
                             </span>
                             change
@@ -126,15 +130,15 @@ const Home = () => {
 
                         <p className="font-baloo font-normal text-[#404852] text-[18px] mt-[1rem] md:mt-[2rem]">
                             Explore our curated collection of articles delving deep into the&nbsp;
-                            <span className="hidden md:inline">
+                            <span className="hidden lg:inline">
                                 <br/>
                             </span>
                             intricate facets of climate change, offering insights, solutions,&nbsp;
-                            <span className="hidden md:inline">
+                            <span className="hidden lg:inline">
                                 <br/>
                             </span>
                             and inspiration to catalyze meaningful action towards a greener,&nbsp;
-                            <span className="hidden md:inline">
+                            <span className="hidden lg:inline">
                                 <br/>
                             </span>
                             more sustainable future.
@@ -142,7 +146,7 @@ const Home = () => {
 
                     </div>
 
-                    <div className="mt-[5rem] md:mt-[10rem]">
+                    <div className="mt-[5rem] md:mt-[5rem] lg:mt-[10rem]">
                         <Link to="/blogs" className="block">
                             <div className="cursor-pointer">
                                 <div className="flex">
