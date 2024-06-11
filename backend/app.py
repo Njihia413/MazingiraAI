@@ -37,11 +37,6 @@ def drop_table(table_name, engine=engine):
     table = metadata.tables[table_name]
     Base.metadata.drop_all(engine, [table], checkfirst=True)
 
-drop_table('messages')
-drop_table('chats')
-drop_table('users')
-
-
 class User(db.Model):
   __tablename__ = 'users'
   
