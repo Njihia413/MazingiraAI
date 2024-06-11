@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css"
+import L from 'leaflet'
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
 
 function Map(){
+    const [map, setMap] = useState(null)
+
+    useEffect(() => {
+        if(!document.getElementById('map').innerHTML){
+            const map = L.map('map').setView([ 0.0236, 37.9062], 7)
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            setMap(map)
+        }
+
+        return () => map?.remove()
+    }, [])
+
     return (
-        <MapContainer center={[-0.023559, 37.906193]} zoom={7} scrollWheelZoom={false} style={{height: '100vh'}}>
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[-0.023559, 37.906193]}>
-                <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-            </Marker>
-        </MapContainer>
+        <div id="map" style={{height: '100vh'}}></div>
     )
 }
 
