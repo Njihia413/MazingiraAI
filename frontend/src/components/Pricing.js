@@ -38,7 +38,7 @@ const Pricing = () => {
                                           color="#4d5053"/>
                                 </svg>
                                 <p>
-                                    Everything in Basic
+                                    Everything in Free
                                 </p>
                             </div>
 

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import Navbar from "./Navbar";
 import parse from 'html-react-parser';
+import Footer from "./Footer";
 
 const BlogDetails = () => {
     const [blogdetails, setBlogDetails] = useState([]);
@@ -42,11 +43,12 @@ const BlogDetails = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto mt-[3rem]">
+            <div className="container mx-auto mt-[3rem] p-8 md:p-5 lg:p-0">
                 <p className="font-baloo">
                     {parse(`${blogdetails.actualDescription}`)}
                 </p>
             </div>
+            <Footer/>
         </>
     )
 }
