@@ -10,11 +10,11 @@ const Login = () => {
     const { userData } = useContext(UserContext)
     const navigate = useNavigate()
 
-    // useEffect(() => {
-    //     if(!!userData){
-    //         navigate('/chat')
-    //     }
-    // }, [userData])
+    useEffect(() => {
+        if(!!userData){
+            navigate('/chat')
+        }
+    }, [userData])
 
     return (
         <section>

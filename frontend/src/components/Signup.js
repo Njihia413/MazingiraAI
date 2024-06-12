@@ -12,7 +12,7 @@ const Signup = () => {
 
     useEffect(() => {
         if(userData){
-            navigate('/chat')
+            navigate('/login')
         }
     }, [userData])
 
