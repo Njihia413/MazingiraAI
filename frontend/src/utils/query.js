@@ -19,7 +19,7 @@ async function askyourpdf(chat){
   if(messages.length){
     payload['messages'] = messages
   }
-console.log("key: ", process.env.REACT_APP_ASKYOURPDF_TOKEN)
+  
   const response = await fetch('https://api.askyourpdf.com/v1/api/knowledge_base_chat?model_name=GPT3', {
     method: 'POST',
     headers: {
