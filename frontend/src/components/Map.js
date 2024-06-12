@@ -1,20 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css"
-import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
+import L from 'leaflet'
+import locations from "../utils/locations";
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import Navbar from "./Navbar";
+
 
 function Map(){
+    const [map, setMap] = useState(null)
+
+    let DefaultIcon = L.icon({
+        iconUrl: icon,
+        shadowUrl: iconShadow
+    });
+
+    L.Marker.prototype.options.icon = DefaultIcon;
+
+    useEffect(() => {
+        if(!document.getElementById('map').innerHTML){
+            const map = L.map('map').setView([ 0.0236, 37.9062], 7)
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            locations.forEach(l => {
+                const marker = new L.marker([l.longitude, l.latitude])
+                  .bindPopup(l.name)
+                  .addTo(map);
+            })
+            setMap(map)
+        }
+
+        return () => map?.remove()
+    }, [])
+
     return (
-        <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-            <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[51.505, -0.09]}>
-                <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-            </Marker>
-        </MapContainer>
+        <div className="chat h-screen">
+            <Navbar />
+            <div id="map" style={{height: '100vh'}}></div>
+        </div>
     )
 }
 
