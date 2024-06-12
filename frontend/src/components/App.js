@@ -7,7 +7,9 @@ import About from "./About";
 import Contact from "./Contact";
 import FourOFour from "./FourOFour";
 import Blogs from "./Blogs";
+import BlogDetails from "./BlogDetails";
 import Map from "./Map";
+import Pricing from "./Pricing";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/blogs" element={<Blogs/>}/>
+            <Route path="/blogs/:blogId" element={<BlogDetails/>} />
+            <Route path="/pricing" element={<Pricing/>}/>
             <Route path="*" element={<FourOFour/>}/>
         </Routes>
     </div>

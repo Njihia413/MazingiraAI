@@ -61,7 +61,7 @@ const Contact = () => {
     return (
         <>
             <Navbar/>
-            <div className="grid md:grid-cols-1 mt-[2rem] bg-white min-h-screen">
+            <div className="grid md:grid-cols-1 bg-white min-h-screen">
                 <div className="container mx-auto">
                     <div className="text-center">
                         <h4 className="font-baloo font-bold text-[#121212] text-[38px] md:text-[48px]">
@@ -77,8 +77,8 @@ const Contact = () => {
 
                     <div className="md:mt-[2rem] mt-[1rem] md:p-0 p-6">
                         <div className="bg-[#ececec] rounded-md mb-[2rem]">
-                            <div className="grid md:grid-cols-3">
-                                <div className="col-span-1 bg-contactBackground h-auto rounded-md pl-[2rem] py-[1rem] hidden sm:hidden md:block">
+                            <div className="grid lg:grid-cols-3">
+                                <div className="col-span-1 bg-contactBackground h-auto rounded-md pl-[2rem] py-[1rem] hidden md:hidden lg:block">
                                     {/*<img src={ContactFrame} alt="ContactFrame" className="h-full"/>*/}
                                     <p className="font-baloo font-semibold text-[28px] text-white">Contact Information</p>
 
