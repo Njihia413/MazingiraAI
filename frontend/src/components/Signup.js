@@ -18,7 +18,7 @@ const Signup = () => {
 
     return (
         <section>
-            <div className="min-h-screen grid md:grid-cols-2">
+            <div className="min-h-screen grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
                 <div className="p-10">
                     <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse cursor-pointer">
                         <img className="h-16" alt="Logo" src={Logo} />
@@ -35,7 +35,7 @@ const Signup = () => {
                     <SignupForm/>
                 </div>
 
-                <div className="hidden sm:hidden md:block">
+                <div className="hidden md:hidden lg:block">
                     <img className="h-full w-full" alt="SignupImg" src={SignupImg}/>
                 </div>
             </div>
