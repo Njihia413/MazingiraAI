@@ -5,26 +5,22 @@ import { GrSend } from "react-icons/gr";
 import { FaSpinner } from "react-icons/fa";
 
 export default function MessageForm({ sendPrompt }) {
-    const [prompt, setPrompt] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [details, setDetails] = useState({prompt: '', loading: false})
 
     function updatePrompt(e) {
         e.preventDefault();
-        setPrompt(e.target.value);
+        setDetails(details => ({...details, prompt: e.target.value}))
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        setIsLoading(true);
-        sendPrompt(prompt)
-            .then(() => {
-                setPrompt('');
-            })
+        setDetails(details => ({...details, loading: true}))
+        sendPrompt(details.prompt, ()=>setDetails(details => ({...details, prompt: ''})))
             .catch(error => {
                 console.error('Error sending prompt:', error);
             })
             .finally(() => {
-                setIsLoading(false);
+                setDetails(details => ({...details, loading: false}));
             });
     }
 
@@ -37,7 +33,7 @@ export default function MessageForm({ sendPrompt }) {
                         rows="1"
                         className="font-baloo block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-none focus:ring-white focus:border-white"
                         placeholder="Your message..."
-                        value={prompt}
+                        value={details.prompt}
                         onChange={updatePrompt}
                     ></textarea>
 
@@ -59,9 +55,9 @@ export default function MessageForm({ sendPrompt }) {
                     <button
                         type="submit"
                         className="inline-flex justify-center p-2 text-[#00BB1E] rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
-                        disabled={isLoading}
+                        disabled={details.loading}
                     >
-                        {isLoading ? <FaSpinner className="animate-spin" /> : <GrSend />}
+                        {details.loading ? <FaSpinner className="animate-spin" /> : <GrSend />}
                         <span className="sr-only">Send message</span>
                     </button>
                 </div>

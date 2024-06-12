@@ -62,19 +62,19 @@ export default function Chat() {
     });
   }
 
-  async function sendPrompt(prompt) {
-    let activeChat;
+  async function sendPrompt(prompt, clearForm){
+    let activeChat
     let chats = chatDetails.chats.map(chat => {
       if (chatDetails.activeChatId === chat.id) {
         chat.messages.push({question: prompt, answer: null, id: 'placeholder'});
         activeChat = JSON.parse(JSON.stringify(chat));
       }
-      return chat;
-    });
-
-    setChats(chats);
-
-    let response = '';
+      return chat
+    })
+    
+    setChats(chats)
+    clearForm()
+    let response = ''
     try {
       if (chatProvider === 'askyourpdf') {
         const activeChat = chatDetails.chats.find(chat => chat.id === chatDetails.activeChatId);
