@@ -136,7 +136,6 @@ def create_user():
 
 # get all users
 @app.route('/api/users', methods=['GET'])
-@jwt_required()
 def get_users():
   try:
     users = User.query.all()
