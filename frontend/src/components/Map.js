@@ -4,6 +4,7 @@ import L from 'leaflet'
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import Navbar from "./Navbar";
+import generateRemarks from "../utils/weatherRemarks";
 
 
 function Map(){
@@ -25,14 +26,20 @@ function Map(){
         .then(res => {
             if(res.ok){
                 res.json().then(data => {
+                    const description = data.weather[0].description
+                    const humidity = data.main.humidity
+                    const pressure = data.main.pressure
+                    const temperature = data.main.temp
+                    const remarks = generateRemarks(description, humidity, pressure)
+                    
                     popup
                         .setLatLng(e.latlng)
                         .setContent(`
                             <b>WEATHER SUMMARY</b> <br/><br/>
-                            <b>Humidity: </b> ${data.main.humidity}% <br/>
-                            <b>Pressure: </b> ${data.main.pressure}hPa <br/>
-                            <b>Temperature: </b> ${Math.ceil(data.main.temp - 273)}°C <br/><br/>
-                            Expect there to be ${data.weather[0].description}
+                            <b>Humidity: </b> ${humidity}% <br/>
+                            <b>Pressure: </b> ${pressure}hPa <br/>
+                            <b>Temperature: </b> ${Math.ceil(temperature - 273)}°C <br/><br/>
+                            ${remarks}
                         `)
                         .openOn(map);
                 })
