@@ -10,8 +10,11 @@ export default function Chats({ setActiveChatId, activeChatId, chatDetails, setC
         fetch(`${apiHost}/chats/${chatId}`, {
             method: 'DELETE',
             headers: {
-                Authorization: `Bearer ${userData?.accessToken}`
-            }
+                Authorization: `Bearer ${userData?.accessToken}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({})
         }).then(res => {
             if (res.ok) {
                 setChats(chatDetails.chats.filter(chat => chat.id !== chatId));
