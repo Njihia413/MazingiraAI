@@ -1,12 +1,15 @@
 from flask import Flask, request, jsonify, make_response, session, redirect, url_for
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, get_jwt
-from flask_bcrypt import Bcrypt 
+from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from os import environ
 from flask_cors import CORS
 import contextlib
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.ext.declarative import declarative_base
+from flask_mail import Mail, Message
+import random
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}}) # This will enable CORS for all routes
@@ -17,6 +20,15 @@ app.config['SECRET_KEY'] = 'maureen_njihia'
 app.config["JWT_SECRET_KEY"] = 'maureen_njihia'
 app.config['JWT_TOKEN_LOCATION'] = ['headers']
 
+# Configuration for Flask-Mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'maureennjihia468@gmail.com'
+app.config['MAIL_PASSWORD'] = 'Melissa@atara413'
+
+mail = Mail(app)
+
 # Database Initialization
 db = SQLAlchemy(app)
 
@@ -24,7 +36,7 @@ db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
 # bcrypt initialization
-bcrypt = Bcrypt(app) 
+bcrypt = Bcrypt(app)
 
 # delete tables
 engine = create_engine(environ.get('DB_URL'))
@@ -39,7 +51,7 @@ def drop_table(table_name, engine=engine):
 
 class User(db.Model):
   __tablename__ = 'users'
-  
+
   id = db.Column(db.Integer, primary_key=True)
   email = db.Column(db.String(120), unique=True, nullable=False)
   password = db.Column(db.Text(), unique=True, nullable=False)
@@ -87,7 +99,7 @@ class Message(db.Model):
 #               'Access-Control-Allow-Headers': 'Content-Type'}
 #   if request.method.lower() == 'options':
 #     return jsonify(headers), 200
-  
+
 
 #create a test route
 @app.route('/api/test', methods=['GET'])
@@ -120,19 +132,42 @@ def get_me():
 def logout():
   pass
 
+def generate_otp():
+    return random.randint(100000, 999999)
+
+
 # create a user
 @app.route('/api/signup', methods=['POST'])
 def create_user():
-  # try:
-  data = request.get_json()
-  hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-  user = User(email=data['email'], full_name=data['full_name'], password=hashed_password)
-  db.session.add(user)
-  db.session.commit()
-  access_token = create_access_token(identity=user.id)
-  return make_response(jsonify({'user': user.json(), 'access_token': access_token}), 201)
-  # except Exception as e:
-  #   return make_response(jsonify({'message': 'error creating user'}), 500)
+    data = request.get_json()
+    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+    user = User(email=data['email'], full_name=data['full_name'], password=hashed_password)
+    db.session.add(user)
+    db.session.commit()
+
+    # Generate OTP
+    otp = generate_otp()
+    session['otp'] = otp
+    session['email'] = user.email
+
+    # Send OTP email
+    msg = Message('Your OTP Code', sender='maureennjihia468@gmail.com', recipients=[user.email])
+    msg.body = f'Your OTP code is {otp}'
+    mail.send(msg)
+
+    return make_response(jsonify({'message': 'User created. OTP sent to email.'}), 201)
+
+@app.route('/api/verify-otp', methods=['POST'])
+def verify_otp():
+    data = request.get_json()
+    otp = data['otp']
+    email = session.get('email')
+
+    if otp == session.get('otp') and email:
+        user = User.query.filter_by(email=email).first()
+        access_token = create_access_token(identity=user.id)
+        return make_response(jsonify({'user': user.json(), 'access_token': access_token}), 200)
+    return make_response(jsonify({'message': 'Invalid OTP'}), 401)
 
 # get all users
 @app.route('/api/users', methods=['GET'])
