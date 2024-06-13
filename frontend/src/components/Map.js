@@ -29,9 +29,9 @@ function Map(){
                         .setLatLng(e.latlng)
                         .setContent(`
                             <b>WEATHER SUMMARY</b> <br/><br/>
-                            <b>Humidity: </b> ${data.main.humidity} <br/>
-                            <b>Pressure: </b> ${data.main.pressure} <br/>
-                            <b>Temperature: </b> ${data.main.temp} <br/><br/>
+                            <b>Humidity: </b> ${data.main.humidity}% <br/>
+                            <b>Pressure: </b> ${data.main.pressure}hPa <br/>
+                            <b>Temperature: </b> ${Math.ceil(data.main.temp - 273)}°C <br/><br/>
                             Expect there to be ${data.weather[0].description}
                         `)
                         .openOn(map);
