@@ -4,11 +4,12 @@ import { apiHost } from "../utils/apiHost";
 const UserContext = createContext();
 
 function UserDetailContextProvider({children}){
-    const [userData, setUserData] = useState(null)
+  const data = localStorage.getItem('data')
+  const localStorageData = data? JSON.parse(atob(localStorage.getItem('data') || '') || null)  : null
+  const [userData, setUserData] = useState(localStorageData?.user)
 
     useEffect(() => {
-        const data = localStorage.getItem('data')
-        const localStorageData = data? JSON.parse(atob(localStorage.getItem('data'))) : null
+        console.log("data: ", data)
         fetch(`${apiHost}/me`, {
             method: "GET",
             headers: {
@@ -22,7 +23,7 @@ function UserDetailContextProvider({children}){
                       accessToken: d.access_token
                     }
                     localStorage.setItem('data', btoa(JSON.stringify(data)))
-                    setUserData(data)
+                    setUserData(data.user)
                 })
               }else {
                 localStorage.clear()
