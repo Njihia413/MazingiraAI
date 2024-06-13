@@ -9,6 +9,7 @@ from sqlalchemy import MetaData, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from flask_mail import Mail, Message
 import random
+import string
 
 
 app = Flask(__name__)
@@ -25,7 +26,8 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'maureennjihia468@gmail.com'
-app.config['MAIL_PASSWORD'] = 'Melissa@atara413'
+app.config['MAIL_PASSWORD'] = 'bcgf ztfw demw dtcw'
+app.config['MAIL_DEFAULT_SENDER'] = 'maureennjihia468@gmail.com'
 
 mail = Mail(app)
 
@@ -132,8 +134,26 @@ def get_me():
 def logout():
   pass
 
-def generate_otp():
-    return random.randint(100000, 999999)
+def generate_otp(length=6):
+    return ''.join(random.choices(string.digits, k=length))
+
+def send_otp(email, otp):
+    try:
+        msg = Message("Email verification OTP for Mazingira AI", recipients=[email])
+        msg.body=(
+            f"Dear User,\n\n"
+            f"Thank you for registering with Mazingira AI. To complete your registration, please verify your email address by entering the following OTP:\n\n"
+            f"OTP: {otp}\n\n"
+            f"If you did not request this OTP, please ignore this email.\n\n"
+            f"Best regards,\n"
+            f"The Mazingira AI Team"
+        )
+        mail = current_app.extensions.get('mail')
+        mail.send(msg)
+        return True
+    except Exception as e:
+        print(f"Error sending email: {e}")
+        return False
 
 
 # create a user
@@ -150,12 +170,25 @@ def create_user():
     session['otp'] = otp
     session['email'] = user.email
 
+    print(f"Generated OTP: {otp}")
+    print(f"Session OTP: {session.get('otp')}")
+
+
     # Send OTP email
-    msg = Message('Your OTP Code', sender='maureennjihia468@gmail.com', recipients=[user.email])
-    msg.body = f'Your OTP code is {otp}'
-    mail.send(msg)
+    if send_otp(user.email, otp):
+        print(f"Email sent to {user.email} with OTP {otp}")
+    else:
+        print(f"Failed to send OTP to {user.email}")
 
     return make_response(jsonify({'message': 'User created. OTP sent to email.'}), 201)
+
+@app.route('/api/test-email', methods=['GET'])
+def test_email():
+    otp = generate_otp()
+    if send_otp('maureennjihia468@gmail.com', otp):
+        return make_response(jsonify({'message': 'Test email sent successfully.'}), 200)
+    else:
+        return make_response(jsonify({'message': 'Failed to send test email.'}), 500)
 
 @app.route('/api/verify-otp', methods=['POST'])
 def verify_otp():
