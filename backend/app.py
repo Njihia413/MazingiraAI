@@ -7,10 +7,6 @@ from flask_cors import CORS
 import contextlib
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from flask_mail import Mail, Message
-import random
-import string
-
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}}) # This will enable CORS for all routes
@@ -20,16 +16,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
 app.config['SECRET_KEY'] = 'maureen_njihia'
 app.config["JWT_SECRET_KEY"] = 'maureen_njihia'
 app.config['JWT_TOKEN_LOCATION'] = ['headers']
-
-# Configuration for Flask-Mail
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'maureennjihia468@gmail.com'
-app.config['MAIL_PASSWORD'] = 'bcgf ztfw demw dtcw'
-app.config['MAIL_DEFAULT_SENDER'] = 'maureennjihia468@gmail.com'
-
-mail = Mail(app)
 
 # Database Initialization
 db = SQLAlchemy(app)
@@ -134,73 +120,19 @@ def get_me():
 def logout():
   pass
 
-def generate_otp(length=6):
-    return ''.join(random.choices(string.digits, k=length))
-
-def send_otp(email, otp):
-    try:
-        msg = Message("Email verification OTP for Mazingira AI", recipients=[email])
-        msg.body=(
-            f"Dear User,\n\n"
-            f"Thank you for registering with Mazingira AI. To complete your registration, please verify your email address by entering the following OTP:\n\n"
-            f"OTP: {otp}\n\n"
-            f"If you did not request this OTP, please ignore this email.\n\n"
-            f"Best regards,\n"
-            f"The Mazingira AI Team"
-        )
-        mail = current_app.extensions.get('mail')
-        mail.send(msg)
-        return True
-    except Exception as e:
-        print(f"Error sending email: {e}")
-        return False
-
-
 # create a user
 @app.route('/api/signup', methods=['POST'])
 def create_user():
-    data = request.get_json()
-    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    user = User(email=data['email'], full_name=data['full_name'], password=hashed_password)
-    db.session.add(user)
-    db.session.commit()
-
-    # Generate OTP
-    otp = generate_otp()
-    session['otp'] = otp
-    session['email'] = user.email
-
-    print(f"Generated OTP: {otp}")
-    print(f"Session OTP: {session.get('otp')}")
-
-
-    # Send OTP email
-    if send_otp(user.email, otp):
-        print(f"Email sent to {user.email} with OTP {otp}")
-    else:
-        print(f"Failed to send OTP to {user.email}")
-
-    return make_response(jsonify({'message': 'User created. OTP sent to email.'}), 201)
-
-@app.route('/api/test-email', methods=['GET'])
-def test_email():
-    otp = generate_otp()
-    if send_otp('maureennjihia468@gmail.com', otp):
-        return make_response(jsonify({'message': 'Test email sent successfully.'}), 200)
-    else:
-        return make_response(jsonify({'message': 'Failed to send test email.'}), 500)
-
-@app.route('/api/verify-otp', methods=['POST'])
-def verify_otp():
-    data = request.get_json()
-    otp = data['otp']
-    email = session.get('email')
-
-    if otp == session.get('otp') and email:
-        user = User.query.filter_by(email=email).first()
-        access_token = create_access_token(identity=user.id)
-        return make_response(jsonify({'user': user.json(), 'access_token': access_token}), 200)
-    return make_response(jsonify({'message': 'Invalid OTP'}), 401)
+  # try:
+  data = request.get_json()
+  hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+  user = User(email=data['email'], full_name=data['full_name'], password=hashed_password)
+  db.session.add(user)
+  db.session.commit()
+  access_token = create_access_token(identity=user.id)
+  return make_response(jsonify({'user': user.json(), 'access_token': access_token}), 201)
+  # except Exception as e:
+  #   return make_response(jsonify({'message': 'error creating user'}), 500)
 
 # get all users
 @app.route('/api/users', methods=['GET'])
