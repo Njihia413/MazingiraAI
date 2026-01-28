@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+# MazingiraAI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**MazingiraAI** is your gateway to real-time climate insights. It is a dynamic hub designed to provide actionable climate knowledge, personalized sustainability guidance, and breaking news on climate change. By leveraging conversational AI and real-time data, MazingiraAI guides users towards a resilient and sustainable tomorrow.
 
-## Available Scripts
+"Mazingira" is Swahili for _Environment_.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Key Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **🤖 AI Climate Companion**: A 24/7 conversational AI that answers your questions about climate change, sustainability, and environmental stewardship.
+- **🌍 Real-Time Climate Map**: An interactive map powered by OpenWeatherMap that provides instant weather summaries (Humidity, Pressure, Temperature) and insights for any location.
+- **📰 Climate News & Blogs**: A curated collection of articles delving into the intricate facets of climate change, offering solutions and inspiration.
+- **💡 Personalized Guidance**: Tailored insights to help you navigate the complexities of sustainability with confidence.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠️ Technology Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
 
-### `npm run build`
+- **React**: UI library for building the interface.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Leaflet & React-Leaflet**: Interactive JavaScript library for mobile-friendly interactive maps.
+- **Axios**: For making HTTP requests to the backend.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Backend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Flask**: Python micro-framework for the API.
+- **PostgreSQL**: Relational database for storing user data, chats, and logs.
+- **SQLAlchemy**: ORM for database interactions.
+- **Flask-JWT-Extended**: For secure user authentication.
+- **Gunicorn**: WSGI HTTP Server for production deployment.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### DevOps
 
-### `npm run eject`
+- **Docker**: Containerization for consistent development and production environments.
+- **Docker Compose**: Orchestration for multi-container local development.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🏁 Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Follow these instructions to get a copy of the project up and running on your local machine.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Prerequisites
 
-## Learn More
+- **Node.js** (v16 or higher)
+- **Docker Desktop** (running)
+- **Git**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1. Clone the Repository
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+git clone https://github.com/your-username/MazingiraAI.git
+cd MazingiraAI
+```
 
-### Code Splitting
+### 2. Start the Backend (Flask + DB)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The backend is Dockerized for easy setup. It includes the Flask app and a PostgreSQL database.
 
-### Analyzing the Bundle Size
+```bash
+cd backend
+# This runs the database and the flask app (in debug mode)
+docker compose up --build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+_The Backend API will be available at `http://localhost:4000`._
 
-### Making a Progressive Web App
+### 3. Start the Frontend (React)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Open a new terminal tab and navigate to the frontend directory.
 
-### Advanced Configuration
+```bash
+cd frontend
+# Install dependencies (only needed the first time)
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# Start the development server
+npm start
+```
 
-### Deployment
+_The Frontend will be available at `http://localhost:3000`._
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 📦 Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Backend (Railway/Render)
+
+The backend is configured for deployment on platforms like **Railway** or **Render**.
+
+- **Dockerfile**: Includes production settings (using Gunicorn).
+- **Environment Variables**: Ensure you set `DB_URL` and `SECRET_KEY` in your deployment provider.
+
+### Frontend (Vercel/Netlify)
+
+The frontend is a standard React app and can be deployed easily on Vercel.
+
+- Build command: `npm run build`
+- Output directory: `build`
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
